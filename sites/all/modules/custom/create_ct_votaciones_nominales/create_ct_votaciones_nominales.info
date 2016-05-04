@@ -1,0 +1,6 @@
+name = Create CT votaciones nominales
+description = Create Content Type votaciones nominales
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_votaciones_nominales.install
+files[] = create_ct_votaciones_nominales.module

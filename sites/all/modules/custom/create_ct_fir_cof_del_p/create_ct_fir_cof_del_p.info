@@ -1,0 +1,6 @@
+name = Create CT firmante/cofirmante del proyecto
+description = Create Content Type firmante/cofirmante del proyecto
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_fir_cof_del_p.install
+files[] = create_ct_fir_cof_del_p.module

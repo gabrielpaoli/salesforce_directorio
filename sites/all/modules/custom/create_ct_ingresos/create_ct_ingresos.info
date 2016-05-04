@@ -1,0 +1,6 @@
+name = Create CT ingresos
+description = Create Content Type ingresos
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_ingresos.install
+files[] = create_ct_ingresos.module

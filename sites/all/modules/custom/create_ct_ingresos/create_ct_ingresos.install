@@ -1,0 +1,347 @@
+<?php
+/**
+ * Implements hook_install().
+ */
+function  create_ct_ingresos_install() {
+
+
+  $ct_name = 'ingresos';
+
+  // Make sure a testimonial content type doesn't already exist
+  if (!in_array($ct_name, node_type_get_names())) {
+    $type = array(
+      'type' => $ct_name,
+      'name' => st($ct_name),
+      'base' => 'node_content',
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+      'title_label' => 'Títle',
+      'description' => 'Campos del tipo de contenido: ' . $ct_name
+    );
+
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+    create_ct_ingresos_add_custom_fields();
+
+  }
+
+}
+
+
+
+function _create_ct_ingresos_installed_fields() {
+    $t = get_t();
+    return array(
+
+       'field_in_co_de' => array(
+            'field_name' => 'field_in_co_de',
+            'label' => $t('¿Cóbra desarraigo?'),
+            'type' => 'text'
+        ),
+
+        'field_act_pub_p_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_act_pub_p_reference',
+          'type' => 'entityreference', 
+          'label' => 'Actividad pública previa',
+          'description' => 'Actividad pública previa.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'act_pub_pre',
+          ),
+        ),
+
+       'field_in_caialg' => array(
+            'field_name' => 'field_in_caialg',
+            'label' => $t('Categoría impuesto a las ganancias'),
+            'type' => 'text'
+        ),     
+       'field_in_cp' => array(
+            'field_name' => 'field_in_cp',
+            'label' => $t('Creado por'),
+            'type' => 'text'
+        ),     
+       'field_in_desc' => array(
+            'field_name' => 'field_in_desc',
+            'label' => $t('Descripción'),
+            'type' => 'text'
+        ),     
+       'field_in_deta' => array(
+            'field_name' => 'field_in_deta',
+            'label' => $t('Detalles'),
+            'type' => 'text'
+        ),
+       'field_in_edi' => array(
+            'field_name' => 'field_in_edi',
+            'label' => $t('Estado del ingreso'),
+            'type' => 'text'
+        ),          
+       'field_in_fe_de_fi' => array(
+            'field_name' => 'field_in_fe_de_fi',
+            'label' => $t('Fecha de fin'),
+            'type' => 'text'
+        ),     
+       'field_in_fe_de_in' => array(
+            'field_name' => 'field_in_fe_de_in',
+            'label' => $t('Fecha de inicio'),
+            'type' => 'text'
+        ),     
+       'field_in_hacoap' => array(
+            'field_name' => 'field_in_hacoap',
+            'label' => $t('Haberes con aportes'),
+            'type' => 'text'
+        ),
+       'field_in_jubilacion' => array(
+            'field_name' => 'field_in_jubilacion',
+            'label' => $t('Jubilación'),
+            'type' => 'text'
+        ),          
+
+        'field_in_legislador_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_in_legislador_reference',
+          'type' => 'entityreference', 
+          'label' => 'Legislador',
+          'description' => 'Legislador.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+        ),
+
+       'field_in_mdialg' => array(
+            'field_name' => 'field_in_mdialg',
+            'label' => $t('Monto de impuesto a las ganancias'),
+            'type' => 'text'
+        ),          
+       'field_in_ndi' => array(
+            'field_name' => 'field_in_ndi',
+            'label' => $t('Nombre de ingresos'),
+            'type' => 'text'
+        ),          
+       'field_in_obra_social' => array(
+            'field_name' => 'field_in_obra_social',
+            'label' => $t('Obra social'),
+            'type' => 'text'
+        ),          
+       'field_in_sdl' => array(
+            'field_name' => 'field_in_sdl',
+            'label' => $t('Salario del legislador'),
+            'type' => 'text_long'
+        ),          
+       'field_in_sdvoips' => array(
+            'field_name' => 'field_in_sdvoips',
+            'label' => $t('Salario de vida obligatorio IPS'),
+            'type' => 'text'
+        ),          
+       'field_in_ser_fun' => array(
+            'field_name' => 'field_in_ser_fun',
+            'label' => $t('Servicio funerario'),
+            'type' => 'text'
+        ),          
+       'field_in_ump' => array(
+            'field_name' => 'field_in_ump',
+            'label' => $t('Última modificación por'),
+            'type' => 'text'
+        )
+
+    );
+}
+
+function _create_ct_ingresos_installed_instances() {
+    $t = get_t();
+    return array(
+
+
+       'field_in_co_de' => array(
+            'field_name' => 'field_in_co_de',
+            'label' => $t('¿Cóbra desarraigo?'),
+            'type' => 'text'
+        ),
+
+        'field_act_pub_p_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_act_pub_p_reference',
+          'type' => 'entityreference', 
+          'label' => 'Actividad pública previa',
+          'description' => 'Actividad pública previa.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'act_pub_pre',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+
+       'field_in_caialg' => array(
+            'field_name' => 'field_in_caialg',
+            'label' => $t('Categoría impuesto a las ganancias'),
+            'type' => 'text'
+        ),     
+       'field_in_cp' => array(
+            'field_name' => 'field_in_cp',
+            'label' => $t('Creado por'),
+            'type' => 'text'
+        ),     
+       'field_in_desc' => array(
+            'field_name' => 'field_in_desc',
+            'label' => $t('Descripción'),
+            'type' => 'text'
+        ),     
+       'field_in_deta' => array(
+            'field_name' => 'field_in_deta',
+            'label' => $t('Detalles'),
+            'type' => 'text'
+        ),
+       'field_in_edi' => array(
+            'field_name' => 'field_in_edi',
+            'label' => $t('Estado del ingreso'),
+            'type' => 'text'
+        ),          
+       'field_in_fe_de_fi' => array(
+            'field_name' => 'field_in_fe_de_fi',
+            'label' => $t('Fecha de fin'),
+            'type' => 'text'
+        ),     
+       'field_in_fe_de_in' => array(
+            'field_name' => 'field_in_fe_de_in',
+            'label' => $t('Fecha de inicio'),
+            'type' => 'text'
+        ),     
+       'field_in_hacoap' => array(
+            'field_name' => 'field_in_hacoap',
+            'label' => $t('Haberes con aportes'),
+            'type' => 'text'
+        ),
+       'field_in_jubilacion' => array(
+            'field_name' => 'field_in_jubilacion',
+            'label' => $t('Jubilación'),
+            'type' => 'text'
+        ),          
+
+        'field_in_legislador_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_in_legislador_reference',
+          'type' => 'entityreference', 
+          'label' => 'Legislador',
+          'description' => 'Legislador.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+       'field_in_mdialg' => array(
+            'field_name' => 'field_in_mdialg',
+            'label' => $t('Monto de impuesto a las ganancias'),
+            'type' => 'text'
+        ),          
+       'field_in_ndi' => array(
+            'field_name' => 'field_in_ndi',
+            'label' => $t('Nombre de ingresos'),
+            'type' => 'text'
+        ),          
+       'field_in_obra_social' => array(
+            'field_name' => 'field_in_obra_social',
+            'label' => $t('Obra social'),
+            'type' => 'text'
+        ),          
+       'field_in_sdl' => array(
+            'field_name' => 'field_in_sdl',
+            'label' => $t('Salario del legislador'),
+            'type' => 'text_long'
+        ),          
+       'field_in_sdvoips' => array(
+            'field_name' => 'field_in_sdvoips',
+            'label' => $t('Salario de vida obligatorio IPS'),
+            'type' => 'text'
+        ),          
+       'field_in_ser_fun' => array(
+            'field_name' => 'field_in_ser_fun',
+            'label' => $t('Servicio funerario'),
+            'type' => 'text'
+        ),          
+       'field_in_ump' => array(
+            'field_name' => 'field_in_ump',
+            'label' => $t('Última modificación por'),
+            'type' => 'text'
+        )
+     
+
+    );
+}
+
+function create_ct_ingresos_add_custom_fields() {
+    foreach (_create_ct_ingresos_installed_fields() as $field) {
+        field_create_field($field);
+    }
+    foreach (_create_ct_ingresos_installed_instances() as $fieldinstance) {
+        $fieldinstance['entity_type'] = 'node';
+        $fieldinstance['bundle'] = 'ingresos';
+        field_create_instance($fieldinstance);
+    }
+}
+
+
+function  create_ct_ingresos_uninstall() {
+    $ournewtype = 'ingresos';
+    $sql = 'SELECT nid FROM {node} n WHERE n.type = :type';
+    $result = db_query($sql, array(':type' => $ournewtype));
+    $nodeids = array();
+    foreach ($result as $row) {
+        $nodeids[] = $row->nid;
+    }
+    node_delete_multiple($nodeids);
+    create_ct_ingresos_delete_custom_fields();
+    node_type_delete($ournewtype);
+    
+    //BORRO MENU
+    $link_del_menu = 'node/add/' .$ournewtype;
+    menu_link_delete(NULL, $link_del_menu);
+    menu_rebuild();
+
+    field_purge_batch(500);
+
+
+}
+
+function create_ct_ingresos_delete_custom_fields() {
+    foreach (array_keys(_create_ct_ingresos_installed_fields()) as $field) {
+        field_delete_field($field);
+    }
+    $instances = field_info_instances('node', 'ingresos');
+    foreach ($instances as $instance_name => $fieldinstance) {
+        field_delete_instance($fieldinstance);
+    }
+}
+

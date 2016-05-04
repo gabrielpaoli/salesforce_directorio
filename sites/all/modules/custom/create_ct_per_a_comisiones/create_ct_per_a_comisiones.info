@@ -1,0 +1,6 @@
+name = Create CT Pertenencia a comisiones
+description = Create Content Type Pertenencia a comisiones
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_per_a_comisiones.install
+files[] = create_ct_per_a_comisiones.module

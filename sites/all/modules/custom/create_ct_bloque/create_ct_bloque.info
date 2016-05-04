@@ -1,0 +1,6 @@
+name = Create CT bloque
+description = Create Content Type bloque
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_bloque.install
+files[] = create_ct_bloque.module

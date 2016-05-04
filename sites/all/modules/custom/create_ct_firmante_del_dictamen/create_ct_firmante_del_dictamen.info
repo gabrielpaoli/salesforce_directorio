@@ -1,0 +1,6 @@
+name = Create CT Firmante del dictamen
+description = Create Content Type Firmante del dictamen
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_firmante_del_dictamen.install
+files[] = create_ct_firmante_del_dictamen.module

@@ -1,0 +1,6 @@
+name = Create CT otras actividades del legislador
+description = Create Content Type otras actividades del legislador
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_o_act_del_legislador.install
+files[] = create_ct_o_act_del_legislador.module

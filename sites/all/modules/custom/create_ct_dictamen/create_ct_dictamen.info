@@ -1,0 +1,6 @@
+name = Create CT dictamen
+description = Create Content Type dictamen
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_dictamen.install
+files[] = create_ct_dictamen.module

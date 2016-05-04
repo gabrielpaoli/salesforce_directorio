@@ -1,0 +1,6 @@
+name = Create CT actividad pública previa
+description = Create Content Type actividad pública previa
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_act_pub_pre.install
+files[] = create_ct_act_pub_pre.module

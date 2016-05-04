@@ -1,0 +1,972 @@
+<?php
+/**
+ * Implements hook_install().
+ */
+function  create_ct_dictamen_install() {
+
+
+  $ct_name = 'dictamen';
+
+  // Make sure a testimonial content type doesn't already exist
+  if (!in_array($ct_name, node_type_get_names())) {
+    $type = array(
+      'type' => $ct_name,
+      'name' => st($ct_name),
+      'base' => 'node_content',
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+      'title_label' => 'Títle',
+      'description' => 'Campos del tipo de contenido: ' . $ct_name
+    );
+
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+    create_ct_dictamen_add_custom_fields();
+
+  }
+
+}
+
+
+
+function _create_ct_dictamen_installed_fields() {
+    $t = get_t();
+    return array(
+
+       'field_dic_se_ha_se_de_pr' => array(
+            'field_name' => 'field_dic_se_ha_se_de_pr',
+            'label' => $t('¿ Se hace seguimiento del proyecto ?'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr' => array(
+            'field_name' => 'field_dic_dtccr',
+            'label' => $t('(DTCCR) Fecha Dictamen'),
+            'type' => 'text'
+        ),
+       'field_dic_am_cam_ori' => array(
+            'field_name' => 'field_dic_am_cam_ori',
+            'label' => $t('AM-Aprobación con modif. de Cám Origen'),
+            'type' => 'text'
+        ),
+       'field_dic_cam' => array(
+            'field_name' => 'field_dic_cam',
+            'label' => $t('Cámara'),
+            'type' => 'text'
+        ),
+       'field_dic_cam_ini' => array(
+            'field_name' => 'field_dic_cam_ini',
+            'label' => $t('Cámara iniciadora'),
+            'type' => 'text'
+        ),
+       'field_dic_cam_rev' => array(
+            'field_name' => 'field_dic_cam_rev',
+            'label' => $t('Cámara revisora'),
+            'type' => 'text'
+        ),
+
+        'field_dic_cofi_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_cofi_reference',
+          'type' => 'entityreference', 
+          'label' => 'Legislador',
+          'description' => 'Legislador.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+        ),
+
+       'field_dic_comentarios' => array(
+            'field_name' => 'field_dic_comentarios',
+            'label' => $t('Comentarios'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_ctccr' => array(
+            'field_name' => 'field_dic_c_ctccr',
+            'label' => $t('Comentarios CTCCR'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_dc' => array(
+            'field_name' => 'field_dic_c_dc',
+            'label' => $t('Comentarios DC'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_dccr' => array(
+            'field_name' => 'field_dic_c_dccr',
+            'label' => $t('Comentarios DCCR'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_dp' => array(
+            'field_name' => 'field_dic_c_dp',
+            'label' => $t('Comentarios DP'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_ms' => array(
+            'field_name' => 'field_dic_c_ms',
+            'label' => $t('Comentarios MS'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_sd' => array(
+            'field_name' => 'field_dic_c_sd',
+            'label' => $t('Comentarios SD'),
+            'type' => 'text_long'
+        ),
+
+        'field_dic_comi_de_cabe_re' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_comi_de_cabe_re',
+          'type' => 'entityreference', 
+          'label' => 'Comisión de cabecera',
+          'description' => 'Comisión de cabecera.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'comision',
+          ),
+        ),
+
+       'field_dic_creado_por' => array(
+            'field_name' => 'field_dic_creado_por',
+            'label' => $t('Creado por'),
+            'type' => 'text'
+        ),
+
+        'field_dic_dccr_co_de_ca_re' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_dccr_co_de_ca_re',
+          'type' => 'entityreference', 
+          'label' => 'DCCR-Comisión de cabecera',
+          'description' => 'DCCR-Comisión de cabecera.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'comision',
+          ),
+        ),
+
+       'field_dic_dccr_com_cab_cr' => array(
+            'field_name' => 'field_dic_dccr_com_cab_cr',
+            'label' => $t('DCCR-Despacho Com. Cab. Cam. Revisora'),
+            'type' => 'text'
+        ),
+       'field_dic_dccr_mod_texto' => array(
+            'field_name' => 'field_dic_dccr_mod_texto',
+            'label' => $t('DCCR-Hubo modificaciones al texto'),
+            'type' => 'text'
+        ),
+       'field_dic_dccr_ple_com' => array(
+            'field_name' => 'field_dic_dccr_ple_com',
+            'label' => $t('DCCR-Plenario de comisiones'),
+            'type' => 'text'
+        ),
+       'field_dic_dc_dic_may' => array(
+            'field_name' => 'field_dic_dc_dic_may',
+            'label' => $t('DC-Dictamen de mayoría'),
+            'type' => 'text'
+        ),
+       'field_dic_dc_dic_may_ob' => array(
+            'field_name' => 'field_dic_dc_dic_may_ob',
+            'label' => $t('DC-Dictamen de mayoría con observaciones'),
+            'type' => 'text'
+        ),
+       'field_dic_dc_dic_min' => array(
+            'field_name' => 'field_dic_dc_dic_min',
+            'label' => $t('DC-Dictamen de minoría'),
+            'type' => 'text'
+        ),
+       'field_dic_dc_fdc' => array(
+            'field_name' => 'field_dic_dc_fdc',
+            'label' => $t('DC-Fecha Dictamen Comisiones'),
+            'type' => 'text'
+        ),
+       'field_dic_hmat' => array(
+            'field_name' => 'field_dic_hmat',
+            'label' => $t('DC-Hubo modificaciones al texto'),
+            'type' => 'text'
+        ),
+       'field_dic_dc_mi_co_ob' => array(
+            'field_name' => 'field_dic_dc_mi_co_ob',
+            'label' => $t('DC-Minoría con observaciones'),
+            'type' => 'text'
+        ),
+       'field_dic_or_de_dia' => array(
+            'field_name' => 'field_dic_or_de_dia',
+            'label' => $t('DC-Orden del día'),
+            'type' => 'text'
+        ),
+       'field_dic_decreto' => array(
+            'field_name' => 'field_dic_decreto',
+            'label' => $t('Decreto'),
+            'type' => 'text'
+        ),
+       'field_dic_cr' => array(
+            'field_name' => 'field_dic_cr',
+            'label' => $t('Dictamen CR'),
+            'type' => 'text'
+        ),
+
+        'field_dic_dist_re' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_dist_re',
+          'type' => 'entityreference', 
+          'label' => 'Distrito',
+          'description' => 'Distrito.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'distrito',
+          ),
+        ),
+
+       'field_dic_dp_fdcc' => array(
+            'field_name' => 'field_dic_dp_fdcc',
+            'label' => $t('DP-Fecha Despacho Comisión Cabecera'),
+            'type' => 'text'
+        ),
+       'field_dic_dp_hmat' => array(
+            'field_name' => 'field_dic_dp_hmat',
+            'label' => $t('DP-Hubo modificaciones al texto'),
+            'type' => 'text'
+        ),
+       'field_dic_dp_pdcom' => array(
+            'field_name' => 'field_dic_dp_pdcom',
+            'label' => $t('DP-Plenario de comisiones'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_ddm' => array(
+            'field_name' => 'field_dic_dtccr_ddm',
+            'label' => $t('DTCCR-Dictamen de mayoría'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_ddm_co' => array(
+            'field_name' => 'field_dic_dtccr_ddm_co',
+            'label' => $t('DTCCR-Dictamen de mayoría con observacio'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_ddm_ddm' => array(
+            'field_name' => 'field_dic_dtccr_ddm_ddm',
+            'label' => $t('DTCCR-Dictamen de minoría'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_hmat' => array(
+            'field_name' => 'field_dic_dtccr_hmat',
+            'label' => $t('DTCCR-Hubo modificaciones al texto'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_mco' => array(
+            'field_name' => 'field_dic_dtccr_mco',
+            'label' => $t('DTCCR-Minoría con observaciones'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_odd' => array(
+            'field_name' => 'field_dic_dtccr_odd',
+            'label' => $t('DTCCR- Orden del día'),
+            'type' => 'text'
+        ),
+       'field_dic_estado' => array(
+            'field_name' => 'field_dic_estado',
+            'label' => $t('Estado'),
+            'type' => 'text'
+        ),
+       'field_dic_estado' => array(
+            'field_name' => 'field_dic_estado',
+            'label' => $t('Estado'),
+            'type' => 'text'
+        ),
+       'field_dic_expe' => array(
+            'field_name' => 'field_dic_expe',
+            'label' => $t('Expediente'),
+            'type' => 'text'
+        ),
+       'field_dic_fpdd' => array(
+            'field_name' => 'field_dic_fpdd',
+            'label' => $t('Fecha de presentación del dictamen'),
+            'type' => 'text'
+        ),
+       'field_dic_fdp' => array(
+            'field_name' => 'field_dic_fdp',
+            'label' => $t('Fecha de Promulgación'),
+            'type' => 'text'
+        ),
+       'field_dic_fdv' => array(
+            'field_name' => 'field_dic_fdv',
+            'label' => $t('Fecha de vencimiento'),
+            'type' => 'text'
+        ),
+       'field_dic_fpbo' => array(
+            'field_name' => 'field_dic_fpbo',
+            'label' => $t('Fecha Publicación Boletín Oficial'),
+            'type' => 'text'
+        ),
+       'field_dic_f_sanci' => array(
+            'field_name' => 'field_dic_f_sanci',
+            'label' => $t('Fecha de sanción'),
+            'type' => 'text'
+        ),
+
+        'field_dic_firm_re' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_firm_re',
+          'type' => 'entityreference', 
+          'label' => 'Firmante',
+          'description' => 'Firmante.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+        ),
+
+       'field_dic_ingresa' => array(
+            'field_name' => 'field_dic_ingresa',
+            'label' => $t('Ingresa'),
+            'type' => 'text'
+        ),
+       'field_dic_latdp' => array(
+            'field_name' => 'field_dic_latdp',
+            'label' => $t('Link a texto del proyecto'),
+            'type' => 'text'
+        ),
+       'field_dic_msfms' => array(
+            'field_name' => 'field_dic_msfms',
+            'label' => $t('MS-Fecha Media Sanción'),
+            'type' => 'text'
+        ),
+       'field_dic_mshmat' => array(
+            'field_name' => 'field_dic_mshmat',
+            'label' => $t('MS-Hubo modificaciones al texto'),
+            'type' => 'text'
+        ),
+       'field_dic_n_ddic' => array(
+            'field_name' => 'field_dic_n_ddic',
+            'label' => $t('Nombre del dictamen'),
+            'type' => 'text'
+        ),
+       'field_dic_n_pddic' => array(
+            'field_name' => 'field_dic_n_pddic',
+            'label' => $t('Nombre público del dictamen'),
+            'type' => 'text'
+        ),
+       'field_dic_numero' => array(
+            'field_name' => 'field_dic_numero',
+            'label' => $t('Número'),
+            'type' => 'text'
+        ),
+       'field_dic_ndbo' => array(
+            'field_name' => 'field_dic_ndbo',
+            'label' => $t('Número del Boletín Oficial'),
+            'type' => 'text'
+        ),
+       'field_dic_obse' => array(
+            'field_name' => 'field_dic_obse',
+            'label' => $t('Observaciones'),
+            'type' => 'text'
+        ),
+       'field_dic_pro' => array(
+            'field_name' => 'field_dic_pro',
+            'label' => $t('Promulgación'),
+            'type' => 'text'
+        ),
+       'field_dic_propie' => array(
+            'field_name' => 'field_dic_propie',
+            'label' => $t('Propietario'),
+            'type' => 'text'
+        ),
+
+        'field_dic_pecr_re' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_pecr_re',
+          'type' => 'entityreference', 
+          'label' => 'Proyecto en Cámara Revisora',
+          'description' => 'Proyecto en Cámara Revisora.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'proyecto',
+          ),
+        ),
+
+       'field_dic_re_final' => array(
+            'field_name' => 'field_dic_re_final',
+            'label' => $t('Resultado final'),
+            'type' => 'text'
+        ),
+       'field_dic_sd_fsd' => array(
+            'field_name' => 'field_dic_sd_fsd',
+            'label' => $t('SD-Fecha Sanción Definitiva'),
+            'type' => 'text'
+        ),
+       'field_dic_sd_ndl' => array(
+            'field_name' => 'field_dic_sd_ndl',
+            'label' => $t('SD-Número de ley'),
+            'type' => 'text'
+        ),
+       'field_dic_sumario' => array(
+            'field_name' => 'field_dic_sumario',
+            'label' => $t('Sumario'),
+            'type' => 'text_long'
+        ),
+       'field_dic_texto' => array(
+            'field_name' => 'field_dic_texto',
+            'label' => $t('Texto'),
+            'type' => 'text_long'
+        ),
+       'field_dic_ti_de_di' => array(
+            'field_name' => 'field_dic_ti_de_di',
+            'label' => $t('Tipo de dictamen'),
+            'type' => 'text'
+        ),
+       'field_dic_to_pa' => array(
+            'field_name' => 'field_dic_to_pa',
+            'label' => $t('Total/Parcial'),
+            'type' => 'text'
+        ),
+       'field_dic_ump' => array(
+            'field_name' => 'field_dic_ump',
+            'label' => $t('Última modificación por'),
+            'type' => 'text'
+        ),
+       'field_dic_veto' => array(
+            'field_name' => 'field_dic_veto',
+            'label' => $t('Veto'),
+            'type' => 'text'
+        )
+       
+
+    );
+}
+
+function _create_ct_dictamen_installed_instances() {
+    $t = get_t();
+    return array(
+
+
+       'field_dic_se_ha_se_de_pr' => array(
+            'field_name' => 'field_dic_se_ha_se_de_pr',
+            'label' => $t('¿ Se hace seguimiento del proyecto ?'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr' => array(
+            'field_name' => 'field_dic_dtccr',
+            'label' => $t('(DTCCR) Fecha Dictamen'),
+            'type' => 'text'
+        ),
+       'field_dic_am_cam_ori' => array(
+            'field_name' => 'field_dic_am_cam_ori',
+            'label' => $t('AM-Aprobación con modif. de Cám Origen'),
+            'type' => 'text'
+        ),
+       'field_dic_cam' => array(
+            'field_name' => 'field_dic_cam',
+            'label' => $t('Cámara'),
+            'type' => 'text'
+        ),
+       'field_dic_cam_ini' => array(
+            'field_name' => 'field_dic_cam_ini',
+            'label' => $t('Cámara iniciadora'),
+            'type' => 'text'
+        ),
+       'field_dic_cam_rev' => array(
+            'field_name' => 'field_dic_cam_rev',
+            'label' => $t('Cámara revisora'),
+            'type' => 'text'
+        ),
+
+        'field_dic_cofi_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_cofi_reference',
+          'type' => 'entityreference', 
+          'label' => 'Legislador',
+          'description' => 'Legislador.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+       'field_dic_comentarios' => array(
+            'field_name' => 'field_dic_comentarios',
+            'label' => $t('Comentarios'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_ctccr' => array(
+            'field_name' => 'field_dic_c_ctccr',
+            'label' => $t('Comentarios CTCCR'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_dc' => array(
+            'field_name' => 'field_dic_c_dc',
+            'label' => $t('Comentarios DC'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_dccr' => array(
+            'field_name' => 'field_dic_c_dccr',
+            'label' => $t('Comentarios DCCR'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_dp' => array(
+            'field_name' => 'field_dic_c_dp',
+            'label' => $t('Comentarios DP'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_ms' => array(
+            'field_name' => 'field_dic_c_ms',
+            'label' => $t('Comentarios MS'),
+            'type' => 'text_long'
+        ),
+       'field_dic_c_sd' => array(
+            'field_name' => 'field_dic_c_sd',
+            'label' => $t('Comentarios SD'),
+            'type' => 'text_long'
+        ),
+
+        'field_dic_comi_de_cabe_re' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_comi_de_cabe_re',
+          'type' => 'entityreference', 
+          'label' => 'Comisión de cabecera',
+          'description' => 'Comisión de cabecera.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'comision',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+
+       'field_dic_creado_por' => array(
+            'field_name' => 'field_dic_creado_por',
+            'label' => $t('Creado por'),
+            'type' => 'text'
+        ),
+
+        'field_dic_dccr_co_de_ca_re' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_dccr_co_de_ca_re',
+          'type' => 'entityreference', 
+          'label' => 'DCCR-Comisión de cabecera',
+          'description' => 'DCCR-Comisión de cabecera.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'comision',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+       'field_dic_dccr_com_cab_cr' => array(
+            'field_name' => 'field_dic_dccr_com_cab_cr',
+            'label' => $t('DCCR-Despacho Com. Cab. Cam. Revisora'),
+            'type' => 'text'
+        ),
+       'field_dic_dccr_mod_texto' => array(
+            'field_name' => 'field_dic_dccr_mod_texto',
+            'label' => $t('DCCR-Hubo modificaciones al texto'),
+            'type' => 'text'
+        ),
+       'field_dic_dccr_ple_com' => array(
+            'field_name' => 'field_dic_dccr_ple_com',
+            'label' => $t('DCCR-Plenario de comisiones'),
+            'type' => 'text'
+        ),
+       'field_dic_dc_dic_may' => array(
+            'field_name' => 'field_dic_dc_dic_may',
+            'label' => $t('DC-Dictamen de mayoría'),
+            'type' => 'text'
+        ),
+       'field_dic_dc_dic_may_ob' => array(
+            'field_name' => 'field_dic_dc_dic_may_ob',
+            'label' => $t('DC-Dictamen de mayoría con observaciones'),
+            'type' => 'text'
+        ),
+       'field_dic_dc_dic_min' => array(
+            'field_name' => 'field_dic_dc_dic_min',
+            'label' => $t('DC-Dictamen de minoría'),
+            'type' => 'text'
+        ),
+       'field_dic_dc_fdc' => array(
+            'field_name' => 'field_dic_dc_fdc',
+            'label' => $t('DC-Fecha Dictamen Comisiones'),
+            'type' => 'text'
+        ),
+       'field_dic_hmat' => array(
+            'field_name' => 'field_dic_hmat',
+            'label' => $t('DC-Hubo modificaciones al texto'),
+            'type' => 'text'
+        ),
+       'field_dic_dc_mi_co_ob' => array(
+            'field_name' => 'field_dic_dc_mi_co_ob',
+            'label' => $t('DC-Minoría con observaciones'),
+            'type' => 'text'
+        ),
+       'field_dic_or_de_dia' => array(
+            'field_name' => 'field_dic_or_de_dia',
+            'label' => $t('DC-Orden del día'),
+            'type' => 'text'
+        ),
+       'field_dic_decreto' => array(
+            'field_name' => 'field_dic_decreto',
+            'label' => $t('Decreto'),
+            'type' => 'text'
+        ),
+       'field_dic_cr' => array(
+            'field_name' => 'field_dic_cr',
+            'label' => $t('Dictamen CR'),
+            'type' => 'text'
+        ),
+
+        'field_dic_dist_re' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_dist_re',
+          'type' => 'entityreference', 
+          'label' => 'Distrito',
+          'description' => 'Distrito.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'distrito',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+       'field_dic_dp_fdcc' => array(
+            'field_name' => 'field_dic_dp_fdcc',
+            'label' => $t('DP-Fecha Despacho Comisión Cabecera'),
+            'type' => 'text'
+        ),
+       'field_dic_dp_hmat' => array(
+            'field_name' => 'field_dic_dp_hmat',
+            'label' => $t('DP-Hubo modificaciones al texto'),
+            'type' => 'text'
+        ),
+       'field_dic_dp_pdcom' => array(
+            'field_name' => 'field_dic_dp_pdcom',
+            'label' => $t('DP-Plenario de comisiones'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_ddm' => array(
+            'field_name' => 'field_dic_dtccr_ddm',
+            'label' => $t('DTCCR-Dictamen de mayoría'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_ddm_co' => array(
+            'field_name' => 'field_dic_dtccr_ddm_co',
+            'label' => $t('DTCCR-Dictamen de mayoría con observacio'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_ddm_ddm' => array(
+            'field_name' => 'field_dic_dtccr_ddm_ddm',
+            'label' => $t('DTCCR-Dictamen de minoría'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_hmat' => array(
+            'field_name' => 'field_dic_dtccr_hmat',
+            'label' => $t('DTCCR-Hubo modificaciones al texto'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_mco' => array(
+            'field_name' => 'field_dic_dtccr_mco',
+            'label' => $t('DTCCR-Minoría con observaciones'),
+            'type' => 'text'
+        ),
+       'field_dic_dtccr_odd' => array(
+            'field_name' => 'field_dic_dtccr_odd',
+            'label' => $t('DTCCR- Orden del día'),
+            'type' => 'text'
+        ),
+       'field_dic_estado' => array(
+            'field_name' => 'field_dic_estado',
+            'label' => $t('Estado'),
+            'type' => 'text'
+        ),
+       'field_dic_estado' => array(
+            'field_name' => 'field_dic_estado',
+            'label' => $t('Estado'),
+            'type' => 'text'
+        ),
+       'field_dic_expe' => array(
+            'field_name' => 'field_dic_expe',
+            'label' => $t('Expediente'),
+            'type' => 'text'
+        ),
+       'field_dic_fpdd' => array(
+            'field_name' => 'field_dic_fpdd',
+            'label' => $t('Fecha de presentación del dictamen'),
+            'type' => 'text'
+        ),
+       'field_dic_fdp' => array(
+            'field_name' => 'field_dic_fdp',
+            'label' => $t('Fecha de Promulgación'),
+            'type' => 'text'
+        ),
+       'field_dic_fdv' => array(
+            'field_name' => 'field_dic_fdv',
+            'label' => $t('Fecha de vencimiento'),
+            'type' => 'text'
+        ),
+       'field_dic_fpbo' => array(
+            'field_name' => 'field_dic_fpbo',
+            'label' => $t('Fecha Publicación Boletín Oficial'),
+            'type' => 'text'
+        ),
+       'field_dic_f_sanci' => array(
+            'field_name' => 'field_dic_f_sanci',
+            'label' => $t('Fecha de sanción'),
+            'type' => 'text'
+        ),
+
+       'field_dic_firm_re' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_firm_re',
+          'type' => 'entityreference', 
+          'label' => 'Firmante',
+          'description' => 'Firmante.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+       'field_dic_ingresa' => array(
+            'field_name' => 'field_dic_ingresa',
+            'label' => $t('Ingresa'),
+            'type' => 'text'
+        ),
+       'field_dic_latdp' => array(
+            'field_name' => 'field_dic_latdp',
+            'label' => $t('Link a texto del proyecto'),
+            'type' => 'text'
+        ),
+       'field_dic_msfms' => array(
+            'field_name' => 'field_dic_msfms',
+            'label' => $t('MS-Fecha Media Sanción'),
+            'type' => 'text'
+        ),
+       'field_dic_mshmat' => array(
+            'field_name' => 'field_dic_mshmat',
+            'label' => $t('MS-Hubo modificaciones al texto'),
+            'type' => 'text'
+        ),
+       'field_dic_n_ddic' => array(
+            'field_name' => 'field_dic_n_ddic',
+            'label' => $t('Nombre del dictamen'),
+            'type' => 'text'
+        ),
+       'field_dic_n_pddic' => array(
+            'field_name' => 'field_dic_n_pddic',
+            'label' => $t('Nombre público del dictamen'),
+            'type' => 'text'
+        ),
+       'field_dic_numero' => array(
+            'field_name' => 'field_dic_numero',
+            'label' => $t('Número'),
+            'type' => 'text'
+        ),
+       'field_dic_ndbo' => array(
+            'field_name' => 'field_dic_ndbo',
+            'label' => $t('Número del Boletín Oficial'),
+            'type' => 'text'
+        ),
+       'field_dic_obse' => array(
+            'field_name' => 'field_dic_obse',
+            'label' => $t('Observaciones'),
+            'type' => 'text'
+        ),
+       'field_dic_pro' => array(
+            'field_name' => 'field_dic_pro',
+            'label' => $t('Promulgación'),
+            'type' => 'text'
+        ),
+       'field_dic_propie' => array(
+            'field_name' => 'field_dic_propie',
+            'label' => $t('Propietario'),
+            'type' => 'text'
+        ),
+
+       'field_dic_pecr_re' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_dic_pecr_re',
+          'type' => 'entityreference', 
+          'label' => 'Proyecto en Cámara Revisora',
+          'description' => 'Proyecto en Cámara Revisora.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'proyecto',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+       'field_dic_re_final' => array(
+            'field_name' => 'field_dic_re_final',
+            'label' => $t('Resultado final'),
+            'type' => 'text'
+        ),
+       'field_dic_sd_fsd' => array(
+            'field_name' => 'field_dic_sd_fsd',
+            'label' => $t('SD-Fecha Sanción Definitiva'),
+            'type' => 'text'
+        ),
+       'field_dic_sd_ndl' => array(
+            'field_name' => 'field_dic_sd_ndl',
+            'label' => $t('SD-Número de ley'),
+            'type' => 'text'
+        ),
+       'field_dic_sumario' => array(
+            'field_name' => 'field_dic_sumario',
+            'label' => $t('Sumario'),
+            'type' => 'text_long'
+        ),
+       'field_dic_texto' => array(
+            'field_name' => 'field_dic_texto',
+            'label' => $t('Texto'),
+            'type' => 'text_long'
+        ),
+       'field_dic_ti_de_di' => array(
+            'field_name' => 'field_dic_ti_de_di',
+            'label' => $t('Tipo de dictamen'),
+            'type' => 'text'
+        ),
+       'field_dic_to_pa' => array(
+            'field_name' => 'field_dic_to_pa',
+            'label' => $t('Total/Parcial'),
+            'type' => 'text'
+        ),
+       'field_dic_ump' => array(
+            'field_name' => 'field_dic_ump',
+            'label' => $t('Última modificación por'),
+            'type' => 'text'
+        ),
+       'field_dic_veto' => array(
+            'field_name' => 'field_dic_veto',
+            'label' => $t('Veto'),
+            'type' => 'text'
+        )
+
+
+    );
+}
+
+function create_ct_dictamen_add_custom_fields() {
+    foreach (_create_ct_dictamen_installed_fields() as $field) {
+        field_create_field($field);
+    }
+    foreach (_create_ct_dictamen_installed_instances() as $fieldinstance) {
+        $fieldinstance['entity_type'] = 'node';
+        $fieldinstance['bundle'] = 'dictamen';
+        field_create_instance($fieldinstance);
+    }
+}
+
+
+function  create_ct_dictamen_uninstall() {
+    $ournewtype = 'dictamen';
+    $sql = 'SELECT nid FROM {node} n WHERE n.type = :type';
+    $result = db_query($sql, array(':type' => $ournewtype));
+    $nodeids = array();
+    foreach ($result as $row) {
+        $nodeids[] = $row->nid;
+    }
+    node_delete_multiple($nodeids);
+    create_ct_dictamen_delete_custom_fields();
+    node_type_delete($ournewtype);
+    
+    //BORRO MENU
+    $link_del_menu = 'node/add/' .$ournewtype;
+    menu_link_delete(NULL, $link_del_menu);
+    menu_rebuild();
+
+    field_purge_batch(500);
+
+
+}
+
+function create_ct_dictamen_delete_custom_fields() {
+    foreach (array_keys(_create_ct_dictamen_installed_fields()) as $field) {
+        field_delete_field($field);
+    }
+    $instances = field_info_instances('node', 'dictamen');
+    foreach ($instances as $instance_name => $fieldinstance) {
+        field_delete_instance($fieldinstance);
+    }
+}
+

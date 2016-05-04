@@ -1,0 +1,6 @@
+name = Create CT legislador
+description = Create Content Type legislador
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_legislador.install
+files[] = create_ct_legislador.module

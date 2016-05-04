@@ -1,0 +1,6 @@
+name = Create CT distrito
+description = Create Content Type distrito
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_distrito.install
+files[] = create_ct_distrito.module

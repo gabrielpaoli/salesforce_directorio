@@ -1,0 +1,222 @@
+<?php
+/**
+ * Implements hook_install().
+ */
+function  create_ct_votaciones_nominales_install() {
+
+
+  $ct_name = 'votaciones_nominales';
+
+  // Make sure a testimonial content type doesn't already exist
+  if (!in_array($ct_name, node_type_get_names())) {
+    $type = array(
+      'type' => $ct_name,
+      'name' => st($ct_name),
+      'base' => 'node_content',
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+      'title_label' => 'Títle',
+      'description' => 'Campos del tipo de contenido: ' . $ct_name
+    );
+
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+    create_ct_votaciones_nominales_add_custom_fields();
+
+  }
+
+}
+
+
+
+function _create_ct_votaciones_nominales_installed_fields() {
+    $t = get_t();
+    return array(
+
+       'field_vot_creado_por' => array(
+            'field_name' => 'field_vot_creado_por',
+            'label' => $t('Creado por'),
+            'type' => 'text'
+        ),
+       'field_vot_detalles' => array(
+            'field_name' => 'field_vot_detalles',
+            'label' => $t('Detalles'),
+            'type' => 'text'
+        ),
+       'field_vot_dictamen' => array(
+            'field_name' => 'field_vot_dictamen',
+            'label' => $t('Dictamen'),
+            'type' => 'text'
+        ),
+        'field_vot_legi_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_vot_legi_reference',
+          'type' => 'entityreference', 
+          'label' => 'Legislador',
+          'description' => 'Legislador.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+        ),
+       'field_vot_nombre_de_vot' => array(
+            'field_name' => 'field_vot_nombre_de_vot',
+            'label' => $t('Nombre de votaciones'),
+            'type' => 'text'
+        ),
+       'field_vot_pub_en_web' => array(
+            'field_name' => 'field_vot_pub_en_web',
+            'label' => $t('Publicar en la web (VN)'),
+            'type' => 'text'
+        ),
+       'field_vot_res_vot' => array(
+            'field_name' => 'field_vot_res_vot',
+            'label' => $t('Resultado de votaciones'),
+            'type' => 'text'
+        ),
+       'field_vot_ult_mod' => array(
+            'field_name' => 'field_vot_ult_mod',
+            'label' => $t('Última modificación por'),
+            'type' => 'text'
+        ),
+       'field_vot_vot_leg' => array(
+            'field_name' => 'field_vot_vot_leg',
+            'label' => $t('Voto del legislador'),
+            'type' => 'text'
+        ),
+       'field_vot_vot_may_blo' => array(
+            'field_name' => 'field_vot_vot_may_blo',
+            'label' => $t('Voto mayoritario del bloque'),
+            'type' => 'text'
+        )
+
+    );
+}
+
+function _create_ct_votaciones_nominales_installed_instances() {
+    $t = get_t();
+    return array(
+
+
+
+       'field_vot_creado_por' => array(
+            'field_name' => 'field_vot_creado_por',
+            'label' => $t('Creado por'),
+            'type' => 'text'
+        ),
+       'field_vot_detalles' => array(
+            'field_name' => 'field_vot_detalles',
+            'label' => $t('Detalles'),
+            'type' => 'text'
+        ),
+       'field_vot_dictamen' => array(
+            'field_name' => 'field_vot_dictamen',
+            'label' => $t('Dictamen'),
+            'type' => 'text'
+        ),
+        'field_vot_legi_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_vot_legi_reference',
+          'type' => 'entityreference', 
+          'label' => 'Legislador',
+          'description' => 'Legislador.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+       'field_vot_nombre_de_vot' => array(
+            'field_name' => 'field_vot_nombre_de_vot',
+            'label' => $t('Nombre de votaciones'),
+            'type' => 'text'
+        ),
+       'field_vot_pub_en_web' => array(
+            'field_name' => 'field_vot_pub_en_web',
+            'label' => $t('Publicar en la web (VN)'),
+            'type' => 'text'
+        ),
+       'field_vot_res_vot' => array(
+            'field_name' => 'field_vot_res_vot',
+            'label' => $t('Resultado de votaciones'),
+            'type' => 'text'
+        ),
+       'field_vot_ult_mod' => array(
+            'field_name' => 'field_vot_ult_mod',
+            'label' => $t('Última modificación por'),
+            'type' => 'text'
+        ),
+       'field_vot_vot_leg' => array(
+            'field_name' => 'field_vot_vot_leg',
+            'label' => $t('Voto del legislador'),
+            'type' => 'text'
+        ),
+       'field_vot_vot_may_blo' => array(
+            'field_name' => 'field_vot_vot_may_blo',
+            'label' => $t('Voto mayoritario del bloque'),
+            'type' => 'text'
+        )
+     
+
+    );
+}
+
+function create_ct_votaciones_nominales_add_custom_fields() {
+    foreach (_create_ct_votaciones_nominales_installed_fields() as $field) {
+        field_create_field($field);
+    }
+    foreach (_create_ct_votaciones_nominales_installed_instances() as $fieldinstance) {
+        $fieldinstance['entity_type'] = 'node';
+        $fieldinstance['bundle'] = 'votaciones_nominales';
+        field_create_instance($fieldinstance);
+    }
+}
+
+
+function  create_ct_votaciones_nominales_uninstall() {
+    $ournewtype = 'votaciones_nominales';
+    $sql = 'SELECT nid FROM {node} n WHERE n.type = :type';
+    $result = db_query($sql, array(':type' => $ournewtype));
+    $nodeids = array();
+    foreach ($result as $row) {
+        $nodeids[] = $row->nid;
+    }
+    node_delete_multiple($nodeids);
+    create_ct_votaciones_nominales_delete_custom_fields();
+    node_type_delete($ournewtype);
+    
+    //BORRO MENU
+    $link_del_menu = 'node/add/' .$ournewtype;
+    menu_link_delete(NULL, $link_del_menu);
+    menu_rebuild();
+
+    field_purge_batch(500);
+
+
+}
+
+function create_ct_votaciones_nominales_delete_custom_fields() {
+    foreach (array_keys(_create_ct_votaciones_nominales_installed_fields()) as $field) {
+        field_delete_field($field);
+    }
+    $instances = field_info_instances('node', 'votaciones_nominales');
+    foreach ($instances as $instance_name => $fieldinstance) {
+        field_delete_instance($fieldinstance);
+    }
+}
+

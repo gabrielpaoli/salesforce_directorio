@@ -1,0 +1,6 @@
+name = Create CT proyecto
+description = Create Content Type proyecto
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_proyecto.install
+files[] = create_ct_proyecto.module

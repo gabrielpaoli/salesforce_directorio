@@ -1,0 +1,6 @@
+name = Create CT camara
+description = Create Content Type camara
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_camara.install
+files[] = create_ct_camara.module

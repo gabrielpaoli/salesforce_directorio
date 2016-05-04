@@ -1,0 +1,6 @@
+name = Create CT affiliation
+description = Create Content Type affiliation
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_affiliation.install
+files[] = create_ct_affiliation.module

@@ -1,0 +1,799 @@
+<?php
+/**
+ * Implements hook_install().
+ */
+function  create_ct_act_pub_pre_install() {
+
+
+  $ct_name = 'act_pub_pre';
+
+  // Make sure a testimonial content type doesn't already exist
+  if (!in_array($ct_name, node_type_get_names())) {
+    $type = array(
+      'type' => $ct_name,
+      'name' => st($ct_name),
+      'base' => 'node_content',
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+      'title_label' => 'Títle',
+      'description' => 'Campos del tipo de contenido: ' . $ct_name
+    );
+
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+    create_ct_act_pub_pre_add_custom_fields();
+
+  }
+
+}
+
+
+
+function _create_ct_act_pub_pre_installed_fields() {
+    $t = get_t();
+    return array(
+
+       'field_app_ri' => array(
+            'field_name' => 'field_app_ri',
+            'label' => $t('Registra ingresos'),
+            'type' => 'text'
+        ),
+       'field_app_anio' => array(
+            'field_name' => 'field_app_anio',
+            'label' => $t('Año'),
+            'type' => 'text'
+        ),
+       'field_app_anio_2' => array(
+            'field_name' => 'field_app_anio_2',
+            'label' => $t('Año (2)'),
+            'type' => 'text'
+        ),
+       'field_app_as_pren' => array(
+            'field_name' => 'field_app_as_pren',
+            'label' => $t('Asesor/a de prensa'),
+            'type' => 'text'
+        ),
+
+        'field_app_bloque_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_app_bloque_reference',
+          'type' => 'entityreference', 
+          'label' => 'Bloque',
+          'description' => 'Bloque.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'bloque',
+          ),
+        ),       
+
+       'field_app_camara' => array(
+            'field_name' => 'field_app_camara',
+            'label' => $t('Cámara'),
+            'type' => 'text'
+        ),
+       'field_app_ca_de_hi' => array(
+            'field_name' => 'field_app_ca_de_hi',
+            'label' => $t('Cantidad de hijos'),
+            'type' => 'text'
+        ),
+       'field_app_ca_se_se_i' => array(
+            'field_name' => 'field_app_ca_se_se_i',
+            'label' => $t('Cargo según sexo (Para imprimir)'),
+            'type' => 'text'
+        ),
+       'field_app_ca_un' => array(
+            'field_name' => 'field_app_ca_un',
+            'label' => $t('Cargo universal'),
+            'type' => 'text'
+        ),
+       'field_app_ce_as_pr' => array(
+            'field_name' => 'field_app_ce_as_pr',
+            'label' => $t('Celular del asesor/a de prensa'),
+            'type' => 'text'
+        ),
+       'field_app_ce_se' => array(
+            'field_name' => 'field_app_ce_se',
+            'label' => $t('Celular del secretario/a'),
+            'type' => 'text'
+        ),
+       'field_app_cea' => array(
+            'field_name' => 'field_app_cea',
+            'label' => $t('Correo electrónico alternativo'),
+            'type' => 'text'
+        ),
+       'field_app_ceds' => array(
+            'field_name' => 'field_app_ceds',
+            'label' => $t('Correo electrónico del/a secretario/a'),
+            'type' => 'text'
+        ),
+       'field_app_cedadp' => array(
+            'field_name' => 'field_app_cedadp',
+            'label' => $t('Correo electrónico del asesor de prensa'),
+            'type' => 'text'
+        ),
+       'field_app_cep' => array(
+            'field_name' => 'field_app_cep',
+            'label' => $t('Correo electrónico personal'),
+            'type' => 'text'
+        ),
+       'field_app_cr_po' => array(
+            'field_name' => 'field_app_cr_po',
+            'label' => $t('Creado por'),
+            'type' => 'text'
+        ),
+       'field_app_detalles' => array(
+            'field_name' => 'field_app_detalles',
+            'label' => $t('Detalles'),
+            'type' => 'text'
+        ),
+       'field_app_dir_leg' => array(
+            'field_name' => 'field_app_dir_leg',
+            'label' => $t('Dirección Legislatura'),
+            'type' => 'text'
+        ),
+
+        'field_app_distrito_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_app_distrito_reference',
+          'type' => 'entityreference', 
+          'label' => 'Distrito',
+          'description' => 'Distrito.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'distrito',
+          ),
+        ),
+       'field_app_dis_mad' => array(
+            'field_name' => 'field_app_dis_mad',
+            'label' => $t('Distrito madre'),
+            'type' => 'text'
+        ),
+       'field_app_eda' => array(
+            'field_name' => 'field_app_eda',
+            'label' => $t('Edad'),
+            'type' => 'text'
+        ),
+       'field_app_emp_a_car' => array(
+            'field_name' => 'field_app_emp_a_car',
+            'label' => $t('Empleados a cargo'),
+            'type' => 'text'
+        ),
+
+       //ESTE CAMPO DEBERÍA SER MÚLTIPLE
+       'field_app_esp' => array(
+            'field_name' => 'field_app_esp',
+            'label' => $t('Especialización'),
+            'type' => 'text'
+        ),
+       'field_app_edcu' => array(
+            'field_name' => 'field_app_edcu',
+            'label' => $t('Éspecificación del cargo universal'),
+            'type' => 'text'
+        ),
+       'field_app_estado' => array(
+            'field_name' => 'field_app_estado',
+            'label' => $t('Estado'),
+            'type' => 'text'
+        ),
+       'field_app_estado_c' => array(
+            'field_name' => 'field_app_estado_c',
+            'label' => $t('Estado civil'),
+            'type' => 'text'
+        ),
+       'field_app_estado_m' => array(
+            'field_name' => 'field_app_estado_m',
+            'label' => $t('Estado del mandato'),
+            'type' => 'text'
+        ),
+       'field_app_fde' => array(
+            'field_name' => 'field_app_fde',
+            'label' => $t('Fecha de egreso'),
+            'type' => 'text'
+        ),
+       'field_app_fdi' => array(
+            'field_name' => 'field_app_fdi',
+            'label' => $t('Fecha de ingreso'),
+            'type' => 'text'
+        ),
+       'field_app_feeb' => array(
+            'field_name' => 'field_app_feeb',
+            'label' => $t('Función en el bloque'),
+            'type' => 'text'
+        ),
+       'field_app_ini_tra' => array(
+            'field_name' => 'field_app_ini_tra',
+            'label' => $t('Iniciativas transparentes'),
+            'type' => 'text_long'
+        ),
+       'field_app_institucion' => array(
+            'field_name' => 'field_app_institucion',
+            'label' => $t('Institución'),
+            'type' => 'text'
+        ),
+       'field_app_institucion_2' => array(
+            'field_name' => 'field_app_institucion_2',
+            'label' => $t('Institución (2)'),
+            'type' => 'text'
+        ),
+
+        'field_app_leg_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_app_leg_reference',
+          'type' => 'entityreference', 
+          'label' => 'Legislador',
+          'description' => 'Legislador.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+        ),        
+
+        'field_app_leg_r_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_app_leg_r_reference',
+          'type' => 'entityreference', 
+          'label' => 'Legislador reemplazado',
+          'description' => 'Legislador reemplazado.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+        ),
+
+       'field_app_lista' => array(
+            'field_name' => 'field_app_lista',
+            'label' => $t('Lista'),
+            'type' => 'text'
+        ),
+       'field_app_mandato' => array(
+            'field_name' => 'field_app_mandato',
+            'label' => $t('Mandato'),
+            'type' => 'text'
+        ),
+       'field_app_ndg' => array(
+            'field_name' => 'field_app_ndg',
+            'label' => $t('Nivel de gobienro'),
+            'type' => 'text'
+        ),
+       'field_app_ndgdd' => array(
+            'field_name' => 'field_app_ndgdd',
+            'label' => $t('Nivel de gobierno del distrito'),
+            'type' => 'text'
+        ),
+       'field_app_ndapp' => array(
+            'field_name' => 'field_app_ndapp',
+            'label' => $t('Nobre de Actividad Pública Previa'),
+            'type' => 'text'
+        ),
+       'field_app_ndc' => array(
+            'field_name' => 'field_app_ndc',
+            'label' => $t('Nombre del cónyuge'),
+            'type' => 'text'
+        ),
+       'field_app_oficina' => array(
+            'field_name' => 'field_app_oficina',
+            'label' => $t('Oficina'),
+            'type' => 'text'
+        ),
+       'field_app_organizacion' => array(
+            'field_name' => 'field_app_organizacion',
+            'label' => $t('Organización'),
+            'type' => 'text'
+        ),
+       'field_app_p_web' => array(
+            'field_name' => 'field_app_p_web',
+            'label' => $t('Páina web'),
+            'type' => 'text'
+        ),
+       'field_app_partido' => array(
+            'field_name' => 'field_app_partido',
+            'label' => $t('Partido'),
+            'type' => 'text'
+        ),
+       'field_app_pdln' => array(
+            'field_name' => 'field_app_pdln',
+            'label' => $t('Provincia del Legislador Nacional'),
+            'type' => 'text'
+        ),
+       'field_app_pro_pre' => array(
+            'field_name' => 'field_app_pro_pre',
+            'label' => $t('Proyectos presentados'),
+            'type' => 'text_long'
+        ),
+       'field_app_rdi' => array(
+            'field_name' => 'field_app_rdi',
+            'label' => $t('Razones de ingreso'),
+            'type' => 'text'
+        ),
+       'field_app_rdinte' => array(
+            'field_name' => 'field_app_rdinte',
+            'label' => $t('Razones de interrumpido'),
+            'type' => 'text'
+        ),
+       'field_app_sec_dep' => array(
+            'field_name' => 'field_app_sec_dep',
+            'label' => $t('Sección/Departamento'),
+            'type' => 'text'
+        ),
+       'field_app_oficina' => array(
+            'field_name' => 'field_app_oficina',
+            'label' => $t('Oficina'),
+            'type' => 'text'
+        ),
+       'field_app_sec_a' => array(
+            'field_name' => 'field_app_sec_a',
+            'label' => $t('Secretario/a'),
+            'type' => 'text'
+        ),
+       'field_app_sexo' => array(
+            'field_name' => 'field_app_sexo',
+            'label' => $t('Sexo'),
+            'type' => 'text'
+        ),
+       'field_app_tel_en_dis' => array(
+            'field_name' => 'field_app_tel_en_dis',
+            'label' => $t('Teléfono en distrito'),
+            'type' => 'text'
+        ),
+       'field_app_ti_ac' => array(
+            'field_name' => 'field_app_ti_ac',
+            'label' => $t('Título académico'),
+            'type' => 'text'
+        ),
+       'field_app_ti_ac_2' => array(
+            'field_name' => 'field_app_ti_ac_2',
+            'label' => $t('Título académico (2)'),
+            'type' => 'text'
+        ),
+       'field_app_uell' => array(
+            'field_name' => 'field_app_uell',
+            'label' => $t('Ubicación en la lista'),
+            'type' => 'text'
+        ),
+       'field_app_ump' => array(
+            'field_name' => 'field_app_ump',
+            'label' => $t('última modificación por'),
+            'type' => 'text'
+        )
+
+    );
+}
+
+function _create_ct_act_pub_pre_installed_instances() {
+    $t = get_t();
+    return array(
+
+
+       'field_app_ri' => array(
+            'field_name' => 'field_app_ri',
+            'label' => $t('Registra ingresos'),
+            'type' => 'text'
+        ),
+       'field_app_anio' => array(
+            'field_name' => 'field_app_anio',
+            'label' => $t('Año'),
+            'type' => 'text'
+        ),
+       'field_app_anio_2' => array(
+            'field_name' => 'field_app_anio_2',
+            'label' => $t('Año (2)'),
+            'type' => 'text'
+        ),
+       'field_app_as_pren' => array(
+            'field_name' => 'field_app_as_pren',
+            'label' => $t('Asesor/a de prensa'),
+            'type' => 'text'
+        ),
+
+        'field_app_bloque_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_app_bloque_reference',
+          'type' => 'entityreference', 
+          'label' => 'Bloque',
+          'description' => 'Bloque.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'bloque',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+       'field_app_camara' => array(
+            'field_name' => 'field_app_camara',
+            'label' => $t('Cámara'),
+            'type' => 'text'
+        ),
+       'field_app_ca_de_hi' => array(
+            'field_name' => 'field_app_ca_de_hi',
+            'label' => $t('Cantidad de hijos'),
+            'type' => 'text'
+        ),
+       'field_app_ca_se_se_i' => array(
+            'field_name' => 'field_app_ca_se_se_i',
+            'label' => $t('Cargo según sexo (Para imprimir)'),
+            'type' => 'text'
+        ),
+       'field_app_ca_un' => array(
+            'field_name' => 'field_app_ca_un',
+            'label' => $t('Cargo universal'),
+            'type' => 'text'
+        ),
+       'field_app_ce_as_pr' => array(
+            'field_name' => 'field_app_ce_as_pr',
+            'label' => $t('Celular del asesor/a de prensa'),
+            'type' => 'text'
+        ),
+       'field_app_ce_se' => array(
+            'field_name' => 'field_app_ce_se',
+            'label' => $t('Celular del secretario/a'),
+            'type' => 'text'
+        ),
+       'field_app_cea' => array(
+            'field_name' => 'field_app_cea',
+            'label' => $t('Correo electrónico alternativo'),
+            'type' => 'text'
+        ),
+       'field_app_ceds' => array(
+            'field_name' => 'field_app_ceds',
+            'label' => $t('Correo electrónico del/a secretario/a'),
+            'type' => 'text'
+        ),
+       'field_app_cedadp' => array(
+            'field_name' => 'field_app_cedadp',
+            'label' => $t('Correo electrónico del asesor de prensa'),
+            'type' => 'text'
+        ),
+       'field_app_cep' => array(
+            'field_name' => 'field_app_cep',
+            'label' => $t('Correo electrónico personal'),
+            'type' => 'text'
+        ),
+       'field_app_cr_po' => array(
+            'field_name' => 'field_app_cr_po',
+            'label' => $t('Creado por'),
+            'type' => 'text'
+        ),
+       'field_app_detalles' => array(
+            'field_name' => 'field_app_detalles',
+            'label' => $t('Detalles'),
+            'type' => 'text'
+        ),
+       'field_app_dir_leg' => array(
+            'field_name' => 'field_app_dir_leg',
+            'label' => $t('Dirección Legislatura'),
+            'type' => 'text'
+        ),
+
+        'field_app_distrito_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_app_distrito_reference',
+          'type' => 'entityreference', 
+          'label' => 'Distrito',
+          'description' => 'Distrito.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'distrito',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+       'field_app_dis_mad' => array(
+            'field_name' => 'field_app_dis_mad',
+            'label' => $t('Distrito madre'),
+            'type' => 'text'
+        ),
+       'field_app_eda' => array(
+            'field_name' => 'field_app_eda',
+            'label' => $t('Edad'),
+            'type' => 'text'
+        ),
+       'field_app_emp_a_car' => array(
+            'field_name' => 'field_app_emp_a_car',
+            'label' => $t('Empleados a cargo'),
+            'type' => 'text'
+        ),
+
+       //ESTE CAMPO DEBERÍA SER MÚLTIPLE
+       'field_app_esp' => array(
+            'field_name' => 'field_app_esp',
+            'label' => $t('Especialización'),
+            'type' => 'text'
+        ),
+       'field_app_edcu' => array(
+            'field_name' => 'field_app_edcu',
+            'label' => $t('Éspecificación del cargo universal'),
+            'type' => 'text'
+        ),
+       'field_app_estado' => array(
+            'field_name' => 'field_app_estado',
+            'label' => $t('Estado'),
+            'type' => 'text'
+        ),
+       'field_app_estado_c' => array(
+            'field_name' => 'field_app_estado_c',
+            'label' => $t('Estado civil'),
+            'type' => 'text'
+        ),
+       'field_app_estado_m' => array(
+            'field_name' => 'field_app_estado_m',
+            'label' => $t('Estado del mandato'),
+            'type' => 'text'
+        ),
+       'field_app_fde' => array(
+            'field_name' => 'field_app_fde',
+            'label' => $t('Fecha de egreso'),
+            'type' => 'text'
+        ),
+       'field_app_fdi' => array(
+            'field_name' => 'field_app_fdi',
+            'label' => $t('Fecha de ingreso'),
+            'type' => 'text'
+        ),
+       'field_app_feeb' => array(
+            'field_name' => 'field_app_feeb',
+            'label' => $t('Función en el bloque'),
+            'type' => 'text'
+        ),
+       'field_app_ini_tra' => array(
+            'field_name' => 'field_app_ini_tra',
+            'label' => $t('Iniciativas transparentes'),
+            'type' => 'text_long'
+        ),
+       'field_app_institucion' => array(
+            'field_name' => 'field_app_institucion',
+            'label' => $t('Institución'),
+            'type' => 'text'
+        ),
+       'field_app_institucion_2' => array(
+            'field_name' => 'field_app_institucion_2',
+            'label' => $t('Institución (2)'),
+            'type' => 'text'
+        ),
+
+        'field_app_leg_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_app_leg_reference',
+          'type' => 'entityreference', 
+          'label' => 'Legislador',
+          'description' => 'Legislador.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+        'field_app_leg_r_reference' => array(
+          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+          'field_name' => 'field_app_leg_r_reference',
+          'type' => 'entityreference', 
+          'label' => 'Legislador reemplazado',
+          'description' => 'Legislador reemplazado.',
+          'settings' => array(
+            'target_type' => 'node',
+            'target_bundle' => 'legislador',
+          ),
+          'widget' => array(
+            'type' => 'entityreference_autocomplete',
+            'settings' => array(
+              'match_operator' => 'STARTS_WITH',
+            ),
+          ),
+          'display' => array(
+            'default' => array(
+              'label' => 'above',
+              'type' => 'entityreference_label',
+              'settings' => array(
+                'link' => TRUE,
+              ),
+            ),
+          ),
+        ),
+
+       'field_app_lista' => array(
+            'field_name' => 'field_app_lista',
+            'label' => $t('Lista'),
+            'type' => 'text'
+        ),
+       'field_app_mandato' => array(
+            'field_name' => 'field_app_mandato',
+            'label' => $t('Mandato'),
+            'type' => 'text'
+        ),
+       'field_app_ndg' => array(
+            'field_name' => 'field_app_ndg',
+            'label' => $t('Nivel de gobienro'),
+            'type' => 'text'
+        ),
+       'field_app_ndgdd' => array(
+            'field_name' => 'field_app_ndgdd',
+            'label' => $t('Nivel de gobierno del distrito'),
+            'type' => 'text'
+        ),
+       'field_app_ndapp' => array(
+            'field_name' => 'field_app_ndapp',
+            'label' => $t('Nobre de Actividad Pública Previa'),
+            'type' => 'text'
+        ),
+       'field_app_ndc' => array(
+            'field_name' => 'field_app_ndc',
+            'label' => $t('Nombre del cónyuge'),
+            'type' => 'text'
+        ),
+       'field_app_oficina' => array(
+            'field_name' => 'field_app_oficina',
+            'label' => $t('Oficina'),
+            'type' => 'text'
+        ),
+       'field_app_organizacion' => array(
+            'field_name' => 'field_app_organizacion',
+            'label' => $t('Organización'),
+            'type' => 'text'
+        ),
+       'field_app_p_web' => array(
+            'field_name' => 'field_app_p_web',
+            'label' => $t('Páina web'),
+            'type' => 'text'
+        ),
+       'field_app_partido' => array(
+            'field_name' => 'field_app_partido',
+            'label' => $t('Partido'),
+            'type' => 'text'
+        ),
+       'field_app_pdln' => array(
+            'field_name' => 'field_app_pdln',
+            'label' => $t('Provincia del Legislador Nacional'),
+            'type' => 'text'
+        ),
+       'field_app_pro_pre' => array(
+            'field_name' => 'field_app_pro_pre',
+            'label' => $t('Proyectos presentados'),
+            'type' => 'text_long'
+        ),
+       'field_app_rdi' => array(
+            'field_name' => 'field_app_rdi',
+            'label' => $t('Razones de ingreso'),
+            'type' => 'text'
+        ),
+       'field_app_rdinte' => array(
+            'field_name' => 'field_app_rdinte',
+            'label' => $t('Razones de interrumpido'),
+            'type' => 'text'
+        ),
+       'field_app_sec_dep' => array(
+            'field_name' => 'field_app_sec_dep',
+            'label' => $t('Sección/Departamento'),
+            'type' => 'text'
+        ),
+       'field_app_oficina' => array(
+            'field_name' => 'field_app_oficina',
+            'label' => $t('Oficina'),
+            'type' => 'text'
+        ),
+       'field_app_sec_a' => array(
+            'field_name' => 'field_app_sec_a',
+            'label' => $t('Secretario/a'),
+            'type' => 'text'
+        ),
+       'field_app_sexo' => array(
+            'field_name' => 'field_app_sexo',
+            'label' => $t('Sexo'),
+            'type' => 'text'
+        ),
+       'field_app_tel_en_dis' => array(
+            'field_name' => 'field_app_tel_en_dis',
+            'label' => $t('Teléfono en distrito'),
+            'type' => 'text'
+        ),
+       'field_app_ti_ac' => array(
+            'field_name' => 'field_app_ti_ac',
+            'label' => $t('Título académico'),
+            'type' => 'text'
+        ),
+       'field_app_ti_ac_2' => array(
+            'field_name' => 'field_app_ti_ac_2',
+            'label' => $t('Título académico (2)'),
+            'type' => 'text'
+        ),
+       'field_app_uell' => array(
+            'field_name' => 'field_app_uell',
+            'label' => $t('Ubicación en la lista'),
+            'type' => 'text'
+        ),
+       'field_app_ump' => array(
+            'field_name' => 'field_app_ump',
+            'label' => $t('última modificación por'),
+            'type' => 'text'
+        )
+      
+
+    );
+}
+
+function create_ct_act_pub_pre_add_custom_fields() {
+    foreach (_create_ct_act_pub_pre_installed_fields() as $field) {
+        field_create_field($field);
+    }
+    foreach (_create_ct_act_pub_pre_installed_instances() as $fieldinstance) {
+        $fieldinstance['entity_type'] = 'node';
+        $fieldinstance['bundle'] = 'act_pub_pre';
+        field_create_instance($fieldinstance);
+    }
+}
+
+
+function  create_ct_act_pub_pre_uninstall() {
+    $ournewtype = 'act_pub_pre';
+    $sql = 'SELECT nid FROM {node} n WHERE n.type = :type';
+    $result = db_query($sql, array(':type' => $ournewtype));
+    $nodeids = array();
+    foreach ($result as $row) {
+        $nodeids[] = $row->nid;
+    }
+    node_delete_multiple($nodeids);
+    create_ct_act_pub_pre_delete_custom_fields();
+    node_type_delete($ournewtype);
+    
+    //BORRO MENU
+    $link_del_menu = 'node/add/' .$ournewtype;
+    menu_link_delete(NULL, $link_del_menu);
+    menu_rebuild();
+
+    field_purge_batch(500);
+
+
+}
+
+function create_ct_act_pub_pre_delete_custom_fields() {
+    foreach (array_keys(_create_ct_act_pub_pre_installed_fields()) as $field) {
+        field_delete_field($field);
+    }
+    $instances = field_info_instances('node', 'act_pub_pre');
+    foreach ($instances as $instance_name => $fieldinstance) {
+        field_delete_instance($fieldinstance);
+    }
+}
+

@@ -1,0 +1,6 @@
+name = Create CT comisión
+description = Create Content Type comisión
+package = Custom CT TYPES modules
+core = 7.x
+files[] = create_ct_comision.install
+files[] = create_ct_comision.module
