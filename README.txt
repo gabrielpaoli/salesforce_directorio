@@ -2,11 +2,10 @@
 CONTENTS OF THIS FILE
 ---------------------
 
- * About Drupal
- * Configuration and features
- * Installation profiles
- * Appearance
- * Developing for Drupal
+ * Drupal
+ * Modules to connect to Salesforce
+ * Database in root
+ * Some magical things
 
 ABOUT DRUPAL
 ------------
