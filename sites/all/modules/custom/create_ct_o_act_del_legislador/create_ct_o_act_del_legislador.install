@@ -33,7 +33,11 @@ function  create_ct_o_act_del_legislador_install() {
 function _create_ct_o_act_del_legislador_installed_fields() {
     $t = get_t();
     return array(
-
+       'field_oadl_id_sa' => array(
+            'field_name' => 'field_oadl_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_oadl_rep_ingresos' => array(
             'field_name' => 'field_oadl_rep_ingresos',
             'label' => $t('¿ Reporta ingresos ?'),
@@ -89,17 +93,11 @@ function _create_ct_o_act_del_legislador_installed_fields() {
             'label' => $t('Hasta año'),
             'type' => 'text'
         ),
-        'field_oadl_legislador_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_oadl_legislador_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-        ),       
+       'field_oadl_legislador_reference' => array(
+            'field_name' => 'field_oadl_legislador_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
+        ), 
        'field_oadl_n_de_o_acti' => array(
             'field_name' => 'field_oadl_n_de_o_acti',
             'label' => $t('Nombre de otras actividades'),
@@ -147,8 +145,12 @@ function _create_ct_o_act_del_legislador_installed_fields() {
 function _create_ct_o_act_del_legislador_installed_instances() {
     $t = get_t();
     return array(
-
-  'field_oadl_rep_ingresos' => array(
+        'field_oadl_id_sa' => array(
+            'field_name' => 'field_oadl_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
+       'field_oadl_rep_ingresos' => array(
             'field_name' => 'field_oadl_rep_ingresos',
             'label' => $t('¿ Reporta ingresos ?'),
             'type' => 'text'
@@ -203,34 +205,11 @@ function _create_ct_o_act_del_legislador_installed_instances() {
             'label' => $t('Hasta año'),
             'type' => 'text'
         ),
-        
-        'field_oadl_legislador_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_oadl_legislador_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
-        ),
-       
+       'field_oadl_legislador_reference' => array(
+            'field_name' => 'field_oadl_legislador_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
+        ), 
        'field_oadl_n_de_o_acti' => array(
             'field_name' => 'field_oadl_n_de_o_acti',
             'label' => $t('Nombre de otras actividades'),

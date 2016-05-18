@@ -34,6 +34,11 @@ function _create_ct_act_pub_pre_installed_fields() {
     $t = get_t();
     return array(
 
+       'field_app_id_sa' => array(
+            'field_name' => 'field_app_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_app_ri' => array(
             'field_name' => 'field_app_ri',
             'label' => $t('Registra ingresos'),
@@ -54,18 +59,11 @@ function _create_ct_act_pub_pre_installed_fields() {
             'label' => $t('Asesor/a de prensa'),
             'type' => 'text'
         ),
-
-        'field_app_bloque_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_app_bloque_reference',
-          'type' => 'entityreference', 
-          'label' => 'Bloque',
-          'description' => 'Bloque.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'bloque',
-          ),
-        ),       
+       'field_app_bloque_reference' => array(
+            'field_name' => 'field_app_bloque_reference',
+            'label' => $t('Bloque'),
+            'type' => 'text'
+        ),
 
        'field_app_camara' => array(
             'field_name' => 'field_app_camara',
@@ -132,17 +130,10 @@ function _create_ct_act_pub_pre_installed_fields() {
             'label' => $t('Dirección Legislatura'),
             'type' => 'text'
         ),
-
-        'field_app_distrito_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_app_distrito_reference',
-          'type' => 'entityreference', 
-          'label' => 'Distrito',
-          'description' => 'Distrito.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
+       'field_app_distrito_reference' => array(
+            'field_name' => 'field_app_distrito_reference',
+            'label' => $t('Distrito'),
+            'type' => 'text'
         ),
        'field_app_dis_mad' => array(
             'field_name' => 'field_app_dis_mad',
@@ -216,31 +207,16 @@ function _create_ct_act_pub_pre_installed_fields() {
             'label' => $t('Institución (2)'),
             'type' => 'text'
         ),
-
-        'field_app_leg_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_app_leg_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-        ),        
-
-        'field_app_leg_r_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_app_leg_r_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador reemplazado',
-          'description' => 'Legislador reemplazado.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
+       'field_app_leg_reference' => array(
+            'field_name' => 'field_app_leg_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),
-
+       'field_app_leg_r_reference' => array(
+            'field_name' => 'field_app_leg_r_reference',
+            'label' => $t('Legislador reemplazado'),
+            'type' => 'text'
+        ),
        'field_app_lista' => array(
             'field_name' => 'field_app_lista',
             'label' => $t('Lista'),
@@ -364,7 +340,11 @@ function _create_ct_act_pub_pre_installed_instances() {
     $t = get_t();
     return array(
 
-
+       'field_app_id_sa' => array(
+            'field_name' => 'field_app_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_app_ri' => array(
             'field_name' => 'field_app_ri',
             'label' => $t('Registra ingresos'),
@@ -385,32 +365,10 @@ function _create_ct_act_pub_pre_installed_instances() {
             'label' => $t('Asesor/a de prensa'),
             'type' => 'text'
         ),
-
-        'field_app_bloque_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_app_bloque_reference',
-          'type' => 'entityreference', 
-          'label' => 'Bloque',
-          'description' => 'Bloque.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'bloque',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_app_bloque_reference' => array(
+            'field_name' => 'field_app_bloque_reference',
+            'label' => $t('Bloque'),
+            'type' => 'text'
         ),
 
        'field_app_camara' => array(
@@ -478,34 +436,11 @@ function _create_ct_act_pub_pre_installed_instances() {
             'label' => $t('Dirección Legislatura'),
             'type' => 'text'
         ),
-
-        'field_app_distrito_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_app_distrito_reference',
-          'type' => 'entityreference', 
-          'label' => 'Distrito',
-          'description' => 'Distrito.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_app_distrito_reference' => array(
+            'field_name' => 'field_app_distrito_reference',
+            'label' => $t('Distrito'),
+            'type' => 'text'
         ),
-
        'field_app_dis_mad' => array(
             'field_name' => 'field_app_dis_mad',
             'label' => $t('Distrito madre'),
@@ -578,61 +513,16 @@ function _create_ct_act_pub_pre_installed_instances() {
             'label' => $t('Institución (2)'),
             'type' => 'text'
         ),
-
-        'field_app_leg_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_app_leg_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_app_leg_reference' => array(
+            'field_name' => 'field_app_leg_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),
-
-        'field_app_leg_r_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_app_leg_r_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador reemplazado',
-          'description' => 'Legislador reemplazado.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_app_leg_r_reference' => array(
+            'field_name' => 'field_app_leg_r_reference',
+            'label' => $t('Legislador reemplazado'),
+            'type' => 'text'
         ),
-
        'field_app_lista' => array(
             'field_name' => 'field_app_lista',
             'label' => $t('Lista'),

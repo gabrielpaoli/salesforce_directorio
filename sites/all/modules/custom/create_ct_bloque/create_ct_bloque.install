@@ -34,6 +34,11 @@ function _create_ct_bloque_installed_fields() {
     $t = get_t();
     return array(
 
+       'field_bl_id_sa' => array(
+            'field_name' => 'field_bl_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_bl_abreviacion' => array(
             'field_name' => 'field_bl_abreviacion',
             'label' => $t('Abreviación'),
@@ -69,17 +74,10 @@ function _create_ct_bloque_installed_fields() {
             'label' => $t('Creado por'),
             'type' => 'text'
         ),
-
-        'field_bl_distrito_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_bl_distrito_related',
-          'type' => 'entityreference', 
-          'label' => 'Distrito',
-          'description' => 'Distrito.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
+       'field_bl_distrito_related' => array(
+            'field_name' => 'field_bl_distrito_related',
+            'label' => $t('Distrito'),
+            'type' => 'text'
         ),
 
        'field_bl_no_de_bl' => array(
@@ -111,8 +109,11 @@ function _create_ct_bloque_installed_instances() {
     $t = get_t();
     return array(
 
-
-
+       'field_bl_id_sa' => array(
+            'field_name' => 'field_bl_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_bl_abreviacion' => array(
             'field_name' => 'field_bl_abreviacion',
             'label' => $t('Abreviación'),
@@ -148,32 +149,10 @@ function _create_ct_bloque_installed_instances() {
             'label' => $t('Creado por'),
             'type' => 'text'
         ),
-
-        'field_bl_distrito_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_bl_distrito_related',
-          'type' => 'entityreference', 
-          'label' => 'Distrito',
-          'description' => 'Distrito.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_bl_distrito_related' => array(
+            'field_name' => 'field_bl_distrito_related',
+            'label' => $t('Distrito'),
+            'type' => 'text'
         ),
 
        'field_bl_no_de_bl' => array(
@@ -196,6 +175,7 @@ function _create_ct_bloque_installed_instances() {
             'label' => $t('Última modificación por'),
             'type' => 'text'
         ),
+     
 
     );
 }

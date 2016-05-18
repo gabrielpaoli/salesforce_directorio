@@ -33,6 +33,11 @@ function _create_ct_firmante_del_dictamen_installed_fields() {
     $t = get_t();
     return array(
 
+       'field_fddi_id_sa' => array(
+            'field_name' => 'field_fddi_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_fddi_cre_por' => array(
             'field_name' => 'field_fddi_cre_por',
             'label' => $t('Creado por'),
@@ -43,29 +48,15 @@ function _create_ct_firmante_del_dictamen_installed_fields() {
             'label' => $t('Detalles'),
             'type' => 'text'
         ),
-
-        'field_fddi_dictamen_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_fddi_dictamen_related',
-          'type' => 'entityreference', 
-          'label' => 'Dicatamen',
-          'description' => 'Dicatamen.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'dictamen',
-          ),
+       'field_fddi_dictamen_related' => array(
+            'field_name' => 'field_fddi_dictamen_related',
+            'label' => $t('Dicatamen'),
+            'type' => 'text'
         ),
-
-        'field_fddi_legislador_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_fddi_legislador_related',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
+       'field_fddi_legislador_related' => array(
+            'field_name' => 'field_fddi_legislador_related',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),
 
        'field_fddi_numero' => array(
@@ -91,6 +82,11 @@ function _create_ct_firmante_del_dictamen_installed_instances() {
     $t = get_t();
     return array(
 
+       'field_fddi_id_sa' => array(
+            'field_name' => 'field_fddi_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_fddi_cre_por' => array(
             'field_name' => 'field_fddi_cre_por',
             'label' => $t('Creado por'),
@@ -101,60 +97,15 @@ function _create_ct_firmante_del_dictamen_installed_instances() {
             'label' => $t('Detalles'),
             'type' => 'text'
         ),
-
-
-        'field_fddi_dictamen_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_fddi_dictamen_related',
-          'type' => 'entityreference', 
-          'label' => 'Dictamen',
-          'description' => 'Dictamen.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'dictamen',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_fddi_dictamen_related' => array(
+            'field_name' => 'field_fddi_dictamen_related',
+            'label' => $t('Dicatamen'),
+            'type' => 'text'
         ),
-
-        'field_fddi_legislador_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_fddi_legislador_related',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_fddi_legislador_related' => array(
+            'field_name' => 'field_fddi_legislador_related',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),
 
        'field_fddi_numero' => array(

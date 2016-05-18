@@ -33,7 +33,11 @@ function  create_ct_affiliation_install() {
 function _create_ct_affiliation_installed_fields() {
     $t = get_t();
     return array(
-
+       'field_af_id_sa' => array(
+            'field_name' => 'field_af_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_af_af_name' => array(
             'field_name' => 'field_af_af_name',
             'label' => $t('Affiliation name'),
@@ -74,17 +78,10 @@ function _create_ct_affiliation_installed_fields() {
             'label' => $t('Status'),
             'type' => 'text'
         ),
-
-        'field_af_contact_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_af_contact_related',
-          'type' => 'entityreference', 
-          'label' => 'Contact',
-          'description' => 'Contact.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
+       'field_af_contact_related' => array(
+            'field_name' => 'field_af_contact_related',
+            'label' => $t('Contact'),
+            'type' => 'text'
         ),
 
        'field_af_organization' => array(
@@ -105,8 +102,11 @@ function _create_ct_affiliation_installed_instances() {
     $t = get_t();
     return array(
 
-
-
+       'field_af_id_sa' => array(
+            'field_name' => 'field_af_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_af_af_name' => array(
             'field_name' => 'field_af_af_name',
             'label' => $t('Affiliation name'),
@@ -147,32 +147,10 @@ function _create_ct_affiliation_installed_instances() {
             'label' => $t('Status'),
             'type' => 'text'
         ),
-
-        'field_af_contact_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_af_contact_related',
-          'type' => 'entityreference', 
-          'label' => 'Contact',
-          'description' => 'Contact.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_af_contact_related' => array(
+            'field_name' => 'field_af_contact_related',
+            'label' => $t('Contact'),
+            'type' => 'text'
         ),
 
        'field_af_organization' => array(
@@ -185,6 +163,7 @@ function _create_ct_affiliation_installed_instances() {
             'label' => $t('Última modificación por'),
             'type' => 'text'
         )
+
      
 
     );

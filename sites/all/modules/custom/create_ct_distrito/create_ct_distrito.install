@@ -33,7 +33,11 @@ function  create_ct_distrito_install() {
 function _create_ct_distrito_installed_fields() {
     $t = get_t();
     return array(
-
+       'field_d_id_sa' => array(
+            'field_name' => 'field_d_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_d_coparticipacion' => array(
             'field_name' => 'field_d_coparticipacion',
             'label' => $t('Coparticipación'),
@@ -45,19 +49,11 @@ function _create_ct_distrito_installed_fields() {
             'type' => 'text'
         ),
 
-
-        'field_distrito_madre' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_distrito_madre',
-          'type' => 'entityreference', 
-          'label' => 'Distrito madre',
-          'description' => 'Distrito madre.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
+       'field_distrito_madre' => array(
+            'field_name' => 'field_distrito_madre',
+            'label' => $t('Distrito madre'),
+            'type' => 'text'
         ),
-
 
        'field_d_fuente' => array(
             'field_name' => 'field_d_fuente',
@@ -65,19 +61,11 @@ function _create_ct_distrito_installed_fields() {
             'type' => 'text'
         ),
 
-
-        'field_gi_a_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_gi_a_related',
-          'type' => 'entityreference', 
-          'label' => 'Gobernador/Intendente Actual',
-          'description' => 'Gobernador/Intendente Actual.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
+       'field_gi_a_related' => array(
+            'field_name' => 'field_gi_a_related',
+            'label' => $t('Gobernador/Intendente Actual'),
+            'type' => 'text'
         ),
-
 
        'field_d_mandato' => array(
             'field_name' => 'field_d_mandato',
@@ -121,8 +109,11 @@ function _create_ct_distrito_installed_fields() {
 function _create_ct_distrito_installed_instances() {
     $t = get_t();
     return array(
-
-
+       'field_d_id_sa' => array(
+            'field_name' => 'field_d_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_d_coparticipacion' => array(
             'field_name' => 'field_d_coparticipacion',
             'label' => $t('Coparticipación'),
@@ -134,34 +125,11 @@ function _create_ct_distrito_installed_instances() {
             'type' => 'text'
         ),
 
-
-        'field_distrito_madre' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_distrito_madre',
-          'type' => 'entityreference', 
-          'label' => 'Distrito madre',
-          'description' => 'Distrito madre.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_distrito_madre' => array(
+            'field_name' => 'field_distrito_madre',
+            'label' => $t('Distrito madre'),
+            'type' => 'text'
         ),
-
 
        'field_d_fuente' => array(
             'field_name' => 'field_d_fuente',
@@ -169,34 +137,11 @@ function _create_ct_distrito_installed_instances() {
             'type' => 'text'
         ),
 
-
-        'field_gi_a_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_gi_a_related',
-          'type' => 'entityreference', 
-          'label' => 'Gobernador/Intendente Actual',
-          'description' => 'Gobernador/Intendente Actual.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_gi_a_related' => array(
+            'field_name' => 'field_gi_a_related',
+            'label' => $t('Gobernador/Intendente Actual'),
+            'type' => 'text'
         ),
-
 
        'field_d_mandato' => array(
             'field_name' => 'field_d_mandato',
@@ -233,6 +178,7 @@ function _create_ct_distrito_installed_instances() {
             'label' => $t('Última modificación por'),
             'type' => 'text'
         )
+
 
     );
 }

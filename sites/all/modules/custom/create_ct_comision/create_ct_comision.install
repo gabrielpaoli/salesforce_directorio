@@ -34,6 +34,12 @@ function _create_ct_comision_installed_fields() {
     $t = get_t();
     return array(
 
+
+       'field_co_id_sa' => array(
+            'field_name' => 'field_co_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_co_abreviatura' => array(
             'field_name' => 'field_co_abreviatura',
             'label' => $t('Abreviatura'),
@@ -65,18 +71,11 @@ function _create_ct_comision_installed_fields() {
             'type' => 'text'
         ),
 
-        'field_co_distrito_refe' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_co_distrito_refe',
-          'type' => 'entityreference', 
-          'label' => 'Distrito',
-          'description' => 'Distrito.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
+       'field_co_distrito_refe' => array(
+            'field_name' => 'field_co_distrito_refe',
+            'label' => $t('Distrito'),
+            'type' => 'text'
         ),
-
        'field_co_ema_d_l_com' => array(
             'field_name' => 'field_co_ema_d_l_com',
             'label' => $t('Email de la comisión'),
@@ -150,7 +149,11 @@ function _create_ct_comision_installed_instances() {
     $t = get_t();
     return array(
 
-
+       'field_co_id_sa' => array(
+            'field_name' => 'field_co_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_co_abreviatura' => array(
             'field_name' => 'field_co_abreviatura',
             'label' => $t('Abreviatura'),
@@ -182,35 +185,11 @@ function _create_ct_comision_installed_instances() {
             'type' => 'text'
         ),
 
-
-        'field_co_distrito_refe' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_co_distrito_refe',
-          'type' => 'entityreference', 
-          'label' => 'Distrito',
-          'description' => 'Distrito.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_co_distrito_refe' => array(
+            'field_name' => 'field_co_distrito_refe',
+            'label' => $t('Distrito'),
+            'type' => 'text'
         ),
-
-
        'field_co_ema_d_l_com' => array(
             'field_name' => 'field_co_ema_d_l_com',
             'label' => $t('Email de la comisión'),
@@ -276,10 +255,6 @@ function _create_ct_comision_installed_instances() {
             'label' => $t('Última modificación por'),
             'type' => 'text'
         ),
-    
-
-
-
 
     );
 }

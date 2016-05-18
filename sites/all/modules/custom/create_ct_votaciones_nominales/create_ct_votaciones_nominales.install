@@ -33,7 +33,12 @@ function  create_ct_votaciones_nominales_install() {
 function _create_ct_votaciones_nominales_installed_fields() {
     $t = get_t();
     return array(
-
+      
+       'field_vot_id_sa' => array(
+            'field_name' => 'field_vot_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_vot_creado_por' => array(
             'field_name' => 'field_vot_creado_por',
             'label' => $t('Creado por'),
@@ -49,16 +54,10 @@ function _create_ct_votaciones_nominales_installed_fields() {
             'label' => $t('Dictamen'),
             'type' => 'text'
         ),
-        'field_vot_legi_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_vot_legi_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
+       'field_vot_legi_reference' => array(
+            'field_name' => 'field_vot_legi_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),
        'field_vot_nombre_de_vot' => array(
             'field_name' => 'field_vot_nombre_de_vot',
@@ -97,9 +96,12 @@ function _create_ct_votaciones_nominales_installed_fields() {
 function _create_ct_votaciones_nominales_installed_instances() {
     $t = get_t();
     return array(
-
-
-
+      
+       'field_vot_id_sa' => array(
+            'field_name' => 'field_vot_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_vot_creado_por' => array(
             'field_name' => 'field_vot_creado_por',
             'label' => $t('Creado por'),
@@ -115,31 +117,10 @@ function _create_ct_votaciones_nominales_installed_instances() {
             'label' => $t('Dictamen'),
             'type' => 'text'
         ),
-        'field_vot_legi_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_vot_legi_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_vot_legi_reference' => array(
+            'field_name' => 'field_vot_legi_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),
        'field_vot_nombre_de_vot' => array(
             'field_name' => 'field_vot_nombre_de_vot',
@@ -171,7 +152,6 @@ function _create_ct_votaciones_nominales_installed_instances() {
             'label' => $t('Voto mayoritario del bloque'),
             'type' => 'text'
         )
-     
 
     );
 }

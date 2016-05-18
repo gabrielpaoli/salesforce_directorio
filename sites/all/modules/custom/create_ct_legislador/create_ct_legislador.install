@@ -33,19 +33,22 @@ function  create_ct_legislador_install() {
 function _create_ct_legislador_installed_fields() {
     $t = get_t();
     return array(
-
-        'field_bloque_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_bloque_related',
-          'type' => 'entityreference', 
-          'label' => 'Bloque relacionado',
-          'description' => 'Bloque relacionado.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'page',
-          ),
+       'field_bloque_id_sa' => array(
+            'field_name' => 'field_bloque_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
+       'field_l_partido' => array(
+            'field_name' => 'field_l_partido',
+            'label' => $t('Partido'),
+            'type' => 'text'
         ),
 
+        'field_bloque_related' => array(
+            'field_name' => 'field_bloque_related',
+            'label' => $t('Bloque relacionado'),
+            'type' => 'text'
+        ),
 
         'field_l_cobra_desarraigo' => array(
             'field_name' => 'field_l_cobra_desarraigo',
@@ -641,36 +644,24 @@ function _create_ct_legislador_installed_fields() {
 function _create_ct_legislador_installed_instances() {
     $t = get_t();
     return array(
-
-        'field_bloque_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_bloque_related',
-          'type' => 'entityreference', 
-          'label' => 'Bloque relacionado',
-          'description' => 'Bloque relacionado.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'page',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+              'field_bloque_id_sa' => array(
+            'field_name' => 'field_bloque_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
         ),
 
+       'field_l_partido' => array(
+            'field_name' => 'field_l_partido',
+            'label' => $t('Partido'),
+            'type' => 'text'
+        ),              
 
-      
+        'field_bloque_related' => array(
+            'field_name' => 'field_bloque_related',
+            'label' => $t('Bloque relacionado'),
+            'type' => 'text'
+        ),
+
         'field_l_cobra_desarraigo' => array(
             'field_name' => 'field_l_cobra_desarraigo',
             'label' => $t('¿Cobra desarraigo?'),
@@ -1258,6 +1249,7 @@ function _create_ct_legislador_installed_instances() {
             'label' => $t('Ültima modificación por'),
             'type' => 'text'
         )
+
     );
 }
 

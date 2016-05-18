@@ -34,6 +34,11 @@ function _create_ct_dictamen_installed_fields() {
     $t = get_t();
     return array(
 
+       'field_dic_id_sa' => array(
+            'field_name' => 'field_dic_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_dic_se_ha_se_de_pr' => array(
             'field_name' => 'field_dic_se_ha_se_de_pr',
             'label' => $t('¿ Se hace seguimiento del proyecto ?'),
@@ -64,19 +69,11 @@ function _create_ct_dictamen_installed_fields() {
             'label' => $t('Cámara revisora'),
             'type' => 'text'
         ),
-
-        'field_dic_cofi_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_cofi_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
+       'field_dic_cofi_reference' => array(
+            'field_name' => 'field_dic_cofi_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),
-
        'field_dic_comentarios' => array(
             'field_name' => 'field_dic_comentarios',
             'label' => $t('Comentarios'),
@@ -112,18 +109,12 @@ function _create_ct_dictamen_installed_fields() {
             'label' => $t('Comentarios SD'),
             'type' => 'text_long'
         ),
-
-        'field_dic_comi_de_cabe_re' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_comi_de_cabe_re',
-          'type' => 'entityreference', 
-          'label' => 'Comisión de cabecera',
-          'description' => 'Comisión de cabecera.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'comision',
-          ),
+       'field_dic_comi_de_cabe_re' => array(
+            'field_name' => 'field_dic_comi_de_cabe_re',
+            'label' => $t('Comisión de cabecera'),
+            'type' => 'text_long'
         ),
+
 
        'field_dic_creado_por' => array(
             'field_name' => 'field_dic_creado_por',
@@ -131,16 +122,10 @@ function _create_ct_dictamen_installed_fields() {
             'type' => 'text'
         ),
 
-        'field_dic_dccr_co_de_ca_re' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_dccr_co_de_ca_re',
-          'type' => 'entityreference', 
-          'label' => 'DCCR-Comisión de cabecera',
-          'description' => 'DCCR-Comisión de cabecera.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'comision',
-          ),
+       'field_dic_dccr_co_de_ca_re' => array(
+            'field_name' => 'field_dic_dccr_co_de_ca_re',
+            'label' => $t('DCCR-Comisión de cabecera'),
+            'type' => 'text_long'
         ),
 
        'field_dic_dccr_com_cab_cr' => array(
@@ -203,17 +188,10 @@ function _create_ct_dictamen_installed_fields() {
             'label' => $t('Dictamen CR'),
             'type' => 'text'
         ),
-
-        'field_dic_dist_re' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_dist_re',
-          'type' => 'entityreference', 
-          'label' => 'Distrito',
-          'description' => 'Distrito.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
+       'field_dic_dist_re' => array(
+            'field_name' => 'field_dic_dist_re',
+            'label' => $t('Distrito'),
+            'type' => 'text'
         ),
 
        'field_dic_dp_fdcc' => array(
@@ -301,17 +279,10 @@ function _create_ct_dictamen_installed_fields() {
             'label' => $t('Fecha de sanción'),
             'type' => 'text'
         ),
-
-        'field_dic_firm_re' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_firm_re',
-          'type' => 'entityreference', 
-          'label' => 'Firmante',
-          'description' => 'Firmante.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
+       'field_dic_firm_re' => array(
+            'field_name' => 'field_dic_firm_re',
+            'label' => $t('Firmante'),
+            'type' => 'text'
         ),
 
        'field_dic_ingresa' => array(
@@ -369,17 +340,10 @@ function _create_ct_dictamen_installed_fields() {
             'label' => $t('Propietario'),
             'type' => 'text'
         ),
-
-        'field_dic_pecr_re' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_pecr_re',
-          'type' => 'entityreference', 
-          'label' => 'Proyecto en Cámara Revisora',
-          'description' => 'Proyecto en Cámara Revisora.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'proyecto',
-          ),
+       'field_dic_pecr_re' => array(
+            'field_name' => 'field_dic_pecr_re',
+            'label' => $t('Proyecto en Cámara Revisora.'),
+            'type' => 'text'
         ),
 
        'field_dic_re_final' => array(
@@ -436,7 +400,12 @@ function _create_ct_dictamen_installed_instances() {
     $t = get_t();
     return array(
 
-
+    
+       'field_dic_id_sa' => array(
+            'field_name' => 'field_dic_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_dic_se_ha_se_de_pr' => array(
             'field_name' => 'field_dic_se_ha_se_de_pr',
             'label' => $t('¿ Se hace seguimiento del proyecto ?'),
@@ -467,34 +436,11 @@ function _create_ct_dictamen_installed_instances() {
             'label' => $t('Cámara revisora'),
             'type' => 'text'
         ),
-
-        'field_dic_cofi_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_cofi_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_dic_cofi_reference' => array(
+            'field_name' => 'field_dic_cofi_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),
-
        'field_dic_comentarios' => array(
             'field_name' => 'field_dic_comentarios',
             'label' => $t('Comentarios'),
@@ -530,32 +476,10 @@ function _create_ct_dictamen_installed_instances() {
             'label' => $t('Comentarios SD'),
             'type' => 'text_long'
         ),
-
-        'field_dic_comi_de_cabe_re' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_comi_de_cabe_re',
-          'type' => 'entityreference', 
-          'label' => 'Comisión de cabecera',
-          'description' => 'Comisión de cabecera.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'comision',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_dic_comi_de_cabe_re' => array(
+            'field_name' => 'field_dic_comi_de_cabe_re',
+            'label' => $t('Comisión de cabecera'),
+            'type' => 'text_long'
         ),
 
 
@@ -565,31 +489,10 @@ function _create_ct_dictamen_installed_instances() {
             'type' => 'text'
         ),
 
-        'field_dic_dccr_co_de_ca_re' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_dccr_co_de_ca_re',
-          'type' => 'entityreference', 
-          'label' => 'DCCR-Comisión de cabecera',
-          'description' => 'DCCR-Comisión de cabecera.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'comision',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_dic_dccr_co_de_ca_re' => array(
+            'field_name' => 'field_dic_dccr_co_de_ca_re',
+            'label' => $t('DCCR-Comisión de cabecera'),
+            'type' => 'text_long'
         ),
 
        'field_dic_dccr_com_cab_cr' => array(
@@ -652,32 +555,10 @@ function _create_ct_dictamen_installed_instances() {
             'label' => $t('Dictamen CR'),
             'type' => 'text'
         ),
-
-        'field_dic_dist_re' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_dist_re',
-          'type' => 'entityreference', 
-          'label' => 'Distrito',
-          'description' => 'Distrito.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_dic_dist_re' => array(
+            'field_name' => 'field_dic_dist_re',
+            'label' => $t('Distrito'),
+            'type' => 'text'
         ),
 
        'field_dic_dp_fdcc' => array(
@@ -765,32 +646,10 @@ function _create_ct_dictamen_installed_instances() {
             'label' => $t('Fecha de sanción'),
             'type' => 'text'
         ),
-
        'field_dic_firm_re' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_firm_re',
-          'type' => 'entityreference', 
-          'label' => 'Firmante',
-          'description' => 'Firmante.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+            'field_name' => 'field_dic_firm_re',
+            'label' => $t('Firmante'),
+            'type' => 'text'
         ),
 
        'field_dic_ingresa' => array(
@@ -848,32 +707,10 @@ function _create_ct_dictamen_installed_instances() {
             'label' => $t('Propietario'),
             'type' => 'text'
         ),
-
        'field_dic_pecr_re' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_dic_pecr_re',
-          'type' => 'entityreference', 
-          'label' => 'Proyecto en Cámara Revisora',
-          'description' => 'Proyecto en Cámara Revisora.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'proyecto',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+            'field_name' => 'field_dic_pecr_re',
+            'label' => $t('Proyecto en Cámara Revisora.'),
+            'type' => 'text'
         ),
 
        'field_dic_re_final' => array(
@@ -921,7 +758,7 @@ function _create_ct_dictamen_installed_instances() {
             'label' => $t('Veto'),
             'type' => 'text'
         )
-
+       
 
     );
 }

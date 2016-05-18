@@ -33,6 +33,11 @@ function _create_ct_camara_installed_fields() {
     $t = get_t();
     return array(
 
+       'field_c_c_id_sa' => array(
+            'field_name' => 'field_c_c_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_c_c_b_c' => array(
             'field_name' => 'field_c_c_b_c',
             'label' => $t('Cantidad de bancas en la cámara'),
@@ -53,19 +58,11 @@ function _create_ct_camara_installed_fields() {
             'label' => $t('Creado por'),
             'type' => 'text'
         ),
-
-        'field_distrito_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_distrito_related',
-          'type' => 'entityreference', 
-          'label' => 'Distrito relacionado',
-          'description' => 'Distrito relacionado.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
+       'field_distrito_related' => array(
+            'field_name' => 'field_distrito_related',
+            'label' => $t('Distrito relacionado.'),
+            'type' => 'text'
         ),
-
 
        'field_c_nomb_cama' => array(
             'field_name' => 'field_c_nomb_cama',
@@ -95,8 +92,11 @@ function _create_ct_camara_installed_instances() {
     $t = get_t();
     return array(
 
-
-
+       'field_c_c_id_sa' => array(
+            'field_name' => 'field_c_c_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_c_c_b_c' => array(
             'field_name' => 'field_c_c_b_c',
             'label' => $t('Cantidad de bancas en la cámara'),
@@ -117,34 +117,11 @@ function _create_ct_camara_installed_instances() {
             'label' => $t('Creado por'),
             'type' => 'text'
         ),
-
-        'field_distrito_related' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_distrito_related',
-          'type' => 'entityreference', 
-          'label' => 'Distrito relacionado',
-          'description' => 'Distrito relacionado.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_distrito_related' => array(
+            'field_name' => 'field_distrito_related',
+            'label' => $t('Distrito relacionado.'),
+            'type' => 'text'
         ),
-
 
        'field_c_nomb_cama' => array(
             'field_name' => 'field_c_nomb_cama',

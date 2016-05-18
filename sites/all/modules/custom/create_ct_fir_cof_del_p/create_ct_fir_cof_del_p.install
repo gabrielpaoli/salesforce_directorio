@@ -34,22 +34,22 @@ function _create_ct_fir_cof_del_p_installed_fields() {
     $t = get_t();
     return array(
 
+       'field_fcdp_id_sa' => array(
+            'field_name' => 'field_fcdp_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
+
        'field_fcdp_cre_por' => array(
             'field_name' => 'field_fcdp_cre_por',
             'label' => $t('Creado por'),
             'type' => 'text'
         ),
 
-        'field_fcdp_legi_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_fcdp_legi_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
+       'field_fcdp_legi_reference' => array(
+            'field_name' => 'field_fcdp_legi_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),
     
        'field_fcdp_numero' => array(
@@ -58,16 +58,10 @@ function _create_ct_fir_cof_del_p_installed_fields() {
             'type' => 'text'
         ),
 
-        'field_fcdp_proy' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_fcdp_proy',
-          'type' => 'entityreference', 
-          'label' => 'Proyecto',
-          'description' => 'Proyecto.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'proyecto',
-          ),
+       'field_fcdp_proy' => array(
+            'field_name' => 'field_fcdp_proy',
+            'label' => $t('Proyecto'),
+            'type' => 'text'
         ),
     
        'field_fcdp_tipo' => array(
@@ -88,72 +82,36 @@ function _create_ct_fir_cof_del_p_installed_instances() {
     $t = get_t();
     return array(
 
+       'field_fcdp_id_sa' => array(
+            'field_name' => 'field_fcdp_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
+
        'field_fcdp_cre_por' => array(
             'field_name' => 'field_fcdp_cre_por',
             'label' => $t('Creado por'),
             'type' => 'text'
         ),
- 
-        'field_fcdp_legi_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_fcdp_legi_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
-        ),
 
+       'field_fcdp_legi_reference' => array(
+            'field_name' => 'field_fcdp_legi_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
+        ),
+    
        'field_fcdp_numero' => array(
             'field_name' => 'field_fcdp_numero',
             'label' => $t('N°'),
             'type' => 'text'
         ),
 
-        'field_fcdp_proy' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_fcdp_proy',
-          'type' => 'entityreference', 
-          'label' => 'Proyecto',
-          'description' => 'Proyecto.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'proyecto',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_fcdp_proy' => array(
+            'field_name' => 'field_fcdp_proy',
+            'label' => $t('Proyecto'),
+            'type' => 'text'
         ),
-
+    
        'field_fcdp_tipo' => array(
             'field_name' => 'field_fcdp_tipo',
             'label' => $t('Tipo'),
@@ -164,6 +122,7 @@ function _create_ct_fir_cof_del_p_installed_instances() {
             'label' => $t('Última modificación por'),
             'type' => 'text'
         )
+
     
     );
 }

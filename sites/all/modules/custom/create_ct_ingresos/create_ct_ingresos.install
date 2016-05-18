@@ -33,23 +33,20 @@ function  create_ct_ingresos_install() {
 function _create_ct_ingresos_installed_fields() {
     $t = get_t();
     return array(
-
+       'field_in_id_sa' => array(
+            'field_name' => 'field_in_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_in_co_de' => array(
             'field_name' => 'field_in_co_de',
             'label' => $t('¿Cóbra desarraigo?'),
             'type' => 'text'
         ),
-
-        'field_act_pub_p_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_act_pub_p_reference',
-          'type' => 'entityreference', 
-          'label' => 'Actividad pública previa',
-          'description' => 'Actividad pública previa.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'act_pub_pre',
-          ),
+       'field_act_pub_p_reference' => array(
+            'field_name' => 'field_act_pub_p_reference',
+            'label' => $t('Actividad pública previa.'),
+            'type' => 'text'
         ),
 
        'field_in_caialg' => array(
@@ -96,19 +93,12 @@ function _create_ct_ingresos_installed_fields() {
             'field_name' => 'field_in_jubilacion',
             'label' => $t('Jubilación'),
             'type' => 'text'
+        ),     
+       'field_in_legislador_reference' => array(
+            'field_name' => 'field_in_legislador_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),          
-
-        'field_in_legislador_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_in_legislador_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-        ),
 
        'field_in_mdialg' => array(
             'field_name' => 'field_in_mdialg',
@@ -152,41 +142,21 @@ function _create_ct_ingresos_installed_fields() {
 function _create_ct_ingresos_installed_instances() {
     $t = get_t();
     return array(
-
-
+       'field_in_id_sa' => array(
+            'field_name' => 'field_in_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_in_co_de' => array(
             'field_name' => 'field_in_co_de',
             'label' => $t('¿Cóbra desarraigo?'),
             'type' => 'text'
         ),
-
-        'field_act_pub_p_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_act_pub_p_reference',
-          'type' => 'entityreference', 
-          'label' => 'Actividad pública previa',
-          'description' => 'Actividad pública previa.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'act_pub_pre',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_act_pub_p_reference' => array(
+            'field_name' => 'field_act_pub_p_reference',
+            'label' => $t('Actividad pública previa.'),
+            'type' => 'text'
         ),
-
 
        'field_in_caialg' => array(
             'field_name' => 'field_in_caialg',
@@ -232,34 +202,12 @@ function _create_ct_ingresos_installed_instances() {
             'field_name' => 'field_in_jubilacion',
             'label' => $t('Jubilación'),
             'type' => 'text'
+        ),     
+       'field_in_legislador_reference' => array(
+            'field_name' => 'field_in_legislador_reference',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),          
-
-        'field_in_legislador_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_in_legislador_reference',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
-        ),
 
        'field_in_mdialg' => array(
             'field_name' => 'field_in_mdialg',
@@ -296,7 +244,6 @@ function _create_ct_ingresos_installed_instances() {
             'label' => $t('Última modificación por'),
             'type' => 'text'
         )
-     
 
     );
 }

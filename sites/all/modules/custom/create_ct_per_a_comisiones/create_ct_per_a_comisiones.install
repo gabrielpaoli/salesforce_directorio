@@ -33,23 +33,20 @@ function  create_ct_per_a_comisiones_install() {
 function _create_ct_per_a_comisiones_installed_fields() {
     $t = get_t();
     return array(
-
+       'field_pac_id_sa' => array(
+            'field_name' => 'field_pac_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_pac_cargo' => array(
             'field_name' => 'field_pac_cargo',
             'label' => $t('Cargo'),
             'type' => 'text'
         ),
-
-        'field_pac_comisi_rela' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_pac_comisi_rela',
-          'type' => 'entityreference', 
-          'label' => 'Comisión',
-          'description' => 'Comisión.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'comision',
-          ),
+       'field_pac_comisi_rela' => array(
+            'field_name' => 'field_pac_comisi_rela',
+            'label' => $t('Comisión'),
+            'type' => 'text'
         ),
 
        'field_pac_creado_por' => array(
@@ -77,17 +74,10 @@ function _create_ct_per_a_comisiones_installed_fields() {
             'label' => $t('Hasta'),
             'type' => 'text'
         ),
-
-        'field_pac_legisl_rela' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_pac_legisl_rela',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
+       'field_pac_legisl_rela' => array(
+            'field_name' => 'field_pac_legisl_rela',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),
 
        'field_pac_no_pe_co' => array(
@@ -107,39 +97,20 @@ function _create_ct_per_a_comisiones_installed_fields() {
 function _create_ct_per_a_comisiones_installed_instances() {
     $t = get_t();
     return array(
-
-
+       'field_pac_id_sa' => array(
+            'field_name' => 'field_pac_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
        'field_pac_cargo' => array(
             'field_name' => 'field_pac_cargo',
             'label' => $t('Cargo'),
             'type' => 'text'
         ),
-
-        'field_pac_comisi_rela' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_pac_comisi_rela',
-          'type' => 'entityreference', 
-          'label' => 'Comisión',
-          'description' => 'Comisión.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'comision',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_pac_comisi_rela' => array(
+            'field_name' => 'field_pac_comisi_rela',
+            'label' => $t('Comisión'),
+            'type' => 'text'
         ),
 
        'field_pac_creado_por' => array(
@@ -167,35 +138,11 @@ function _create_ct_per_a_comisiones_installed_instances() {
             'label' => $t('Hasta'),
             'type' => 'text'
         ),
-
-        'field_pac_legisl_rela' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_pac_legisl_rela',
-          'type' => 'entityreference', 
-          'label' => 'Legislador',
-          'description' => 'Legislador.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'legislador',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+       'field_pac_legisl_rela' => array(
+            'field_name' => 'field_pac_legisl_rela',
+            'label' => $t('Legislador'),
+            'type' => 'text'
         ),
-
-
 
        'field_pac_no_pe_co' => array(
             'field_name' => 'field_pac_no_pe_co',
@@ -207,6 +154,7 @@ function _create_ct_per_a_comisiones_installed_instances() {
             'label' => $t('Última modificación por'),
             'type' => 'text'
         ),
+
 
     );
 }

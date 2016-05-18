@@ -33,35 +33,27 @@ function  create_ct_proyecto_install() {
 function _create_ct_proyecto_installed_fields() {
     $t = get_t();
     return array(
-
+      
+       'field_proy_id_sa' => array(
+            'field_name' => 'field_proy_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
         'field_proy_creado_por' => array(
             'field_name' => 'field_proy_creado_por',
             'label' => $t('Creado por'),
             'type' => 'text'
         ),
-
         'field_proy_dict_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_proy_dict_reference',
-          'type' => 'entityreference', 
-          'label' => 'Dictamen',
-          'description' => 'Dictamen.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'dictamen',
-          ),
+            'field_name' => 'field_proy_dict_reference',
+            'label' => $t('Dictamen'),
+            'type' => 'text'
         ),
 
         'field_proy_dist_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_proy_dist_reference',
-          'type' => 'entityreference', 
-          'label' => 'Distrito',
-          'description' => 'Distrito.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
+            'field_name' => 'field_proy_dist_reference',
+            'label' => $t('Distrito'),
+            'type' => 'text'
         ),
 
        'field_proy_estado' => array(
@@ -131,66 +123,27 @@ function _create_ct_proyecto_installed_fields() {
 function _create_ct_proyecto_installed_instances() {
     $t = get_t();
     return array(
-
-
+      
+       'field_proy_id_sa' => array(
+            'field_name' => 'field_proy_id_sa',
+            'label' => $t('Id de salesforce'),
+            'type' => 'text'
+        ),
         'field_proy_creado_por' => array(
             'field_name' => 'field_proy_creado_por',
             'label' => $t('Creado por'),
             'type' => 'text'
         ),
-
         'field_proy_dict_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_proy_dict_reference',
-          'type' => 'entityreference', 
-          'label' => 'Dictamen',
-          'description' => 'Dictamen.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'dictamen',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+            'field_name' => 'field_proy_dict_reference',
+            'label' => $t('Dictamen'),
+            'type' => 'text'
         ),
 
         'field_proy_dist_reference' => array(
-          'cardinality' => FIELD_CARDINALITY_UNLIMITED,
-          'field_name' => 'field_proy_dist_reference',
-          'type' => 'entityreference', 
-          'label' => 'Distrito',
-          'description' => 'Distrito.',
-          'settings' => array(
-            'target_type' => 'node',
-            'target_bundle' => 'distrito',
-          ),
-          'widget' => array(
-            'type' => 'entityreference_autocomplete',
-            'settings' => array(
-              'match_operator' => 'STARTS_WITH',
-            ),
-          ),
-          'display' => array(
-            'default' => array(
-              'label' => 'above',
-              'type' => 'entityreference_label',
-              'settings' => array(
-                'link' => TRUE,
-              ),
-            ),
-          ),
+            'field_name' => 'field_proy_dist_reference',
+            'label' => $t('Distrito'),
+            'type' => 'text'
         ),
 
        'field_proy_estado' => array(
@@ -253,8 +206,7 @@ function _create_ct_proyecto_installed_instances() {
             'label' => $t('Última modificación por'),
             'type' => 'text'
         )
-
-
+       
     );
 }
 
